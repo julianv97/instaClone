@@ -4,7 +4,7 @@ import {useForm, Controller} from 'react-hook-form';
 
 import {registerUser} from '../../../redux/auth/thunks';
 
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 
 interface RegisterData {
   displayName: string;
@@ -25,14 +25,11 @@ const Register = () => {
     },
   });
 
-  const user = useSelector((state: any) => state.auth.currentUser);
   const dispatch = useDispatch();
 
   const onSubmit: (data: RegisterData) => void = data => {
     dispatch(registerUser(data));
   };
-
-  console.log(user);
 
   return (
     <View>
