@@ -4,13 +4,19 @@ import {View, Text, TextInput, Button} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 
 import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../../types/navigation';
 
 interface LoginData {
   email: string;
   password: string;
 }
 
-const Login = () => {
+interface Props {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Landing'>;
+}
+
+const Login: React.FC<Props> = ({navigation}) => {
   const {
     control,
     handleSubmit,
@@ -29,6 +35,7 @@ const Login = () => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
         console.log('login exitoso');
+        navigation.navigate('Home');
       })
       .catch(error => {
         console.log(error);
