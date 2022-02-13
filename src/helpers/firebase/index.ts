@@ -1,5 +1,7 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import 'firebase/firestore';
+
 import {getAuth} from 'firebase/auth';
 import {getFirestore} from 'firebase/firestore';
 
@@ -28,10 +30,10 @@ const firebaseConfig = {
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-export const db = getFirestore();
-export const auth = getAuth();
+const db = getFirestore();
+const auth = getAuth();
 
-export const tokenListener = () => {
+const tokenListener = () => {
   // Every time the token change, it is saved on sessionStorage
   firebase.auth().onIdTokenChanged(async user => {
     if (user) {
@@ -40,5 +42,7 @@ export const tokenListener = () => {
     }
   });
 };
+
+export {db, auth, tokenListener};
 
 export default firebaseApp;
