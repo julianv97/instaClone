@@ -1,6 +1,7 @@
 import {View, Text, TextInput, Button} from 'react-native';
 import React from 'react';
 import {useForm, Controller} from 'react-hook-form';
+
 import {createUserWithEmailAndPassword} from 'firebase/auth';
 import {doc, setDoc} from 'firebase/firestore';
 import {auth, db} from '../../../helpers/firebase';

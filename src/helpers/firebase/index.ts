@@ -1,11 +1,9 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-
 import {getAuth} from 'firebase/auth';
 import {getFirestore} from 'firebase/firestore';
 
 import Config from 'react-native-config';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {
