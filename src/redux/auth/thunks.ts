@@ -24,8 +24,7 @@ export const getCurrentUser = () => {
   return dispatch => {
     auth.onAuthStateChanged(user => {
       if (user) {
-        dispatch(setCurrentUser(user.email));
-        console.log(user.email);
+        dispatch(setCurrentUser('user.email'));
       }
     });
   };
