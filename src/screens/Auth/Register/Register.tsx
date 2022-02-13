@@ -5,7 +5,7 @@ import {useForm, Controller} from 'react-hook-form';
 
 import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
 
-interface FormData {
+interface RegisterData {
   email: string;
   password: string;
 }
@@ -25,7 +25,7 @@ const Register = () => {
 
   const auth = getAuth();
 
-  const onSubmit: (data: FormData) => void = data => {
+  const onSubmit: (data: RegisterData) => void = data => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
         console.log('usuario creado');
@@ -96,7 +96,7 @@ const Register = () => {
 
       {errors.password && <Text>This is required.</Text>}
 
-      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+      <Button title="Sign Up" onPress={handleSubmit(onSubmit)} />
     </View>
   );
 };

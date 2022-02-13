@@ -1,14 +1,14 @@
-import { View, Text, Button } from 'react-native';
+import {View, Button} from 'react-native';
 import React from 'react';
 
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../types/navigation';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../../types/navigation';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Landing'>;
 }
 
-const Landing: React.FC<Props> = ({ navigation }) => {
+const Landing: React.FC<Props> = ({navigation}) => {
   return (
     <View>
       <Button

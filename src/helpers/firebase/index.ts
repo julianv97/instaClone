@@ -1,5 +1,3 @@
-import {initializeApp} from 'firebase/app';
-
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 
@@ -27,6 +25,8 @@ const firebaseConfig = {
   measurementId: MEASUREMENT_ID,
 };
 
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
 export const tokenListener = () => {
   // Every time the token change, it is saved on sessionStorage
   firebase.auth().onIdTokenChanged(async user => {
@@ -36,7 +36,5 @@ export const tokenListener = () => {
     }
   });
 };
-
-const firebaseApp = () => initializeApp(firebaseConfig);
 
 export default firebaseApp;
