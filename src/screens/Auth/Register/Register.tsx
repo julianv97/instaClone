@@ -1,11 +1,12 @@
 import {View, Text, TextInput, Button} from 'react-native';
 import React from 'react';
-
 import {useForm, Controller} from 'react-hook-form';
-
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {doc, setDoc} from 'firebase/firestore';
+import {auth, db} from '../../../helpers/firebase';
 
 interface RegisterData {
+  name: string;
   email: string;
   password: string;
 }
@@ -23,11 +24,13 @@ const Register = () => {
     },
   });
 
-  const auth = getAuth();
-
   const onSubmit: (data: RegisterData) => void = data => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then(() => {
+      .then(async () => {
+        await setDoc(doc(db, 'users', auth.currentUser!.uid), {
+          name: data.name,
+          email: data.email,
+        });
         console.log('usuario creado');
       })
       .catch(error => {
