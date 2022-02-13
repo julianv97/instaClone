@@ -2,12 +2,12 @@ import {View, Text, TextInput, Button} from 'react-native';
 import React from 'react';
 import {useForm, Controller} from 'react-hook-form';
 
-import {createUserWithEmailAndPassword} from 'firebase/auth';
-import {doc, setDoc} from 'firebase/firestore';
-import {auth, db} from '../../../helpers/firebase';
+import {registerUser} from '../../../redux/auth/thunks';
+
+import {useDispatch, useSelector} from 'react-redux';
 
 interface RegisterData {
-  name: string;
+  displayName: string;
   email: string;
   password: string;
 }
@@ -19,25 +19,20 @@ const Register = () => {
     formState: {errors},
   } = useForm({
     defaultValues: {
-      name: '',
+      displayName: '',
       email: '',
       password: '',
     },
   });
 
+  const user = useSelector((state: any) => state.auth.currentUser);
+  const dispatch = useDispatch();
+
   const onSubmit: (data: RegisterData) => void = data => {
-    createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then(async () => {
-        await setDoc(doc(db, 'users', auth.currentUser!.uid), {
-          name: data.name,
-          email: data.email,
-        });
-        console.log('usuario creado');
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    dispatch(registerUser(data));
   };
+
+  console.log(user);
 
   return (
     <View>
@@ -56,10 +51,10 @@ const Register = () => {
             value={value}
           />
         )}
-        name="name"
+        name="displayName"
       />
 
-      {errors.name && <Text>This is required.</Text>}
+      {errors.displayName && <Text>This is required.</Text>}
 
       <Controller
         control={control}
