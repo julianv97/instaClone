@@ -19,7 +19,7 @@ const Register = () => {
     formState: {errors},
   } = useForm({
     defaultValues: {
-      displayName: '',
+      name: '',
       email: '',
       password: '',
     },
@@ -51,10 +51,10 @@ const Register = () => {
             value={value}
           />
         )}
-        name="displayName"
+        name="name"
       />
 
-      {errors.displayName && <Text>This is required.</Text>}
+      {errors.name && <Text>This is required.</Text>}
 
       <Controller
         control={control}
