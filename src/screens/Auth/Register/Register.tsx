@@ -7,7 +7,7 @@ import {registerUser} from '../../../redux/auth/thunks';
 import {useDispatch} from 'react-redux';
 
 interface RegisterData {
-  displayName: string;
+  name: string;
   email: string;
   password: string;
 }
