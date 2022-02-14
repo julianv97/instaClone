@@ -1,12 +1,8 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import 'firebase/firestore';
-
-import {getAuth} from 'firebase/auth';
-import {getFirestore} from 'firebase/firestore';
+import 'firebase/compat/firestore';
 
 import Config from 'react-native-config';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {
   API_KEY,
@@ -30,19 +26,7 @@ const firebaseConfig = {
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-const db = getFirestore();
-const auth = getAuth();
+const db = firebaseApp.firestore();
+const auth = firebase.auth();
 
-const tokenListener = () => {
-  // Every time the token change, it is saved on sessionStorage
-  firebase.auth().onIdTokenChanged(async user => {
-    if (user) {
-      const token = await user.getIdToken();
-      AsyncStorage.setItem('token', token);
-    }
-  });
-};
-
-export {db, auth, tokenListener};
-
-export default firebaseApp;
+export {auth, db};
