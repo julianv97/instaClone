@@ -1,16 +1,9 @@
 import {View, Text, TextInput, Button} from 'react-native';
 import React from 'react';
 import {useForm, Controller} from 'react-hook-form';
-
 import {registerUser} from '../../../redux/auth/thunks';
-
 import {useDispatch} from 'react-redux';
-
-interface RegisterData {
-  name: string;
-  email: string;
-  password: string;
-}
+import {IRegisterData} from '../../../interfaces';
 
 const Register = () => {
   const {
@@ -27,7 +20,7 @@ const Register = () => {
 
   const dispatch = useDispatch();
 
-  const onSubmit: (data: RegisterData) => void = data => {
+  const onSubmit: (data: IRegisterData) => void = data => {
     dispatch(registerUser(data));
   };
 

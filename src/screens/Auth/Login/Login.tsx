@@ -1,16 +1,10 @@
 import React from 'react';
 import {View, Text, TextInput, Button} from 'react-native';
-
 import {useForm, Controller} from 'react-hook-form';
-
 import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../types/navigation';
-
-interface LoginData {
-  email: string;
-  password: string;
-}
+import {ILoginData} from '../../../interfaces';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Landing'>;
@@ -31,7 +25,7 @@ const Login: React.FC<Props> = ({navigation}) => {
 
   const auth = getAuth();
 
-  const onSubmit: (data: LoginData) => void = data => {
+  const onSubmit: (data: ILoginData) => void = data => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
         console.log('login exitoso');

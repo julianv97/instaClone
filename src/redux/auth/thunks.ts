@@ -1,8 +1,9 @@
 import {createUserWithEmailAndPassword} from 'firebase/auth';
 import {auth, db} from '../../helpers/firebase';
 import {setRegisterUser, setCurrentUser} from './actions';
+import {IRegisterData} from '../../interfaces';
 
-export const registerUser = data => {
+export const registerUser = (data: IRegisterData) => {
   return dispatch => {
     return createUserWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
