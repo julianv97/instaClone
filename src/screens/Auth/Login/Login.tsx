@@ -25,17 +25,7 @@ const Login: React.FC<Props> = ({navigation}) => {
   });
   const dispatch = useDispatch();
 
-  /* const auth = getAuth(); */
-
   const onSubmit: (data: ILoginData) => void = data => {
-    /* signInWithEmailAndPassword(auth, data.email, data.password)
-      .then(() => {
-        console.log('login exitoso');
-        navigation.navigate('Home');
-      })
-      .catch(error => {
-        console.log(error);
-      }); */
     dispatch(loginUser(data, navigation));
   };
 
