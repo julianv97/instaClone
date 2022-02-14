@@ -1,7 +1,7 @@
 import {createUserWithEmailAndPassword} from 'firebase/auth';
 import {auth, db} from '../../helpers/firebase';
-import {setRegisterUser, setCurrentUser} from './actions';
-import {IRegisterData} from '../../interfaces';
+import {setRegisterUser, setCurrentUser, setLoginUser} from './actions';
+import {ILoginData, IRegisterData} from '../../interfaces';
 import {Action} from '../../types/redux';
 
 export const registerUser = (data: IRegisterData, navigation: any) => {
@@ -33,6 +33,20 @@ export const getCurrentUser = () => {
       .get()
       .then(doc => {
         dispatch(setCurrentUser(doc.data()));
+      });
+  };
+};
+
+export const loginUser = (data: ILoginData, navigation: any) => {
+  return (dispatch: (action: Action) => void) => {
+    auth
+      .signInWithEmailAndPassword(data.email, data.password)
+      .then(() => {
+        dispatch(setLoginUser());
+        navigation.navigate('Home');
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 };

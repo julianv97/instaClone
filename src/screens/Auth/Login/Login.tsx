@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, Text, TextInput, Button} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../types/navigation';
 import {ILoginData} from '../../../interfaces';
+import {useDispatch} from 'react-redux';
+import {loginUser} from '../../../redux/auth/thunks';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Landing'>;
@@ -22,18 +23,20 @@ const Login: React.FC<Props> = ({navigation}) => {
       password: '',
     },
   });
+  const dispatch = useDispatch();
 
-  const auth = getAuth();
+  /* const auth = getAuth(); */
 
   const onSubmit: (data: ILoginData) => void = data => {
-    signInWithEmailAndPassword(auth, data.email, data.password)
+    /* signInWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
         console.log('login exitoso');
         navigation.navigate('Home');
       })
       .catch(error => {
         console.log(error);
-      });
+      }); */
+    dispatch(loginUser(data, navigation));
   };
 
   return (

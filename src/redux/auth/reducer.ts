@@ -1,8 +1,13 @@
 import {Action} from '../../types/redux';
-import {SET_REGISTER_USER, SET_CURRENT_USER} from './constants';
+import {
+  SET_REGISTER_USER,
+  SET_CURRENT_USER,
+  LOGIN_FULLFILLED,
+} from './constants';
 
 const initialState = {
   currentUser: null,
+  authenticated: false,
 };
 
 const authReducer = (state = initialState, action: Action) => {
@@ -15,6 +20,11 @@ const authReducer = (state = initialState, action: Action) => {
     case SET_REGISTER_USER:
       return {
         ...state,
+      };
+    case LOGIN_FULLFILLED:
+      return {
+        ...state,
+        authenticated: true,
       };
     default:
       return state;
