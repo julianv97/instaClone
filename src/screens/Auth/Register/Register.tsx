@@ -4,8 +4,14 @@ import {useForm, Controller} from 'react-hook-form';
 import {registerUser} from '../../../redux/auth/thunks';
 import {useDispatch} from 'react-redux';
 import {IRegisterData} from '../../../interfaces';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../../types/navigation';
 
-const Register = () => {
+interface Props {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Register'>;
+}
+
+const Register: React.FC<Props> = ({navigation}) => {
   const {
     control,
     handleSubmit,
@@ -21,7 +27,7 @@ const Register = () => {
   const dispatch = useDispatch();
 
   const onSubmit: (data: IRegisterData) => void = data => {
-    dispatch(registerUser(data));
+    dispatch(registerUser(data, navigation));
   };
 
   return (
