@@ -1,5 +1,4 @@
 import {createUserWithEmailAndPassword} from 'firebase/auth';
-import {doc, setDoc} from 'firebase/firestore';
 import {auth, db} from '../../helpers/firebase';
 import {setRegisterUser, setCurrentUser} from './actions';
 
@@ -7,9 +6,9 @@ export const registerUser = data => {
   return dispatch => {
     return createUserWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
-        setDoc(doc(db, 'users', auth.currentUser!.uid), {
-          name: data.name,
+        db.collection('users').add({
           email: data.email,
+          name: data.name,
         });
         dispatch(setRegisterUser(data));
         console.log('user registered');
