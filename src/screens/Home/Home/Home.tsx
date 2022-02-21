@@ -26,7 +26,12 @@ const Home = () => {
       <Tab.Screen
         name="Settings"
         component={Settings}
-        options={{headerShown: false}}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="cog" color={color} size={size} />
+          ),
+          headerShown: false,
+        }}
       />
     </Tab.Navigator>
   );
