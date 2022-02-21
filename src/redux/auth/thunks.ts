@@ -25,6 +25,7 @@ export const registerUser = (data: IRegisterData, navigation: any) => {
   };
 };
 
+// Método para traer ususarios de la base de datos
 export const getCurrentUser = () => {
   return (dispatch: (action: Action) => void) => {
     db.collection('users')
@@ -43,6 +44,19 @@ export const loginUser = (data: ILoginData, navigation: any) => {
       .then(() => {
         dispatch(setLoginUser(data));
         navigation.navigate('Home');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
+
+export const logoutUser = () => {
+  return (dispatch: (action: Action) => void) => {
+    auth
+      .signOut()
+      .then(() => {
+        dispatch(setCurrentUser({}));
       })
       .catch(error => {
         console.log(error);
