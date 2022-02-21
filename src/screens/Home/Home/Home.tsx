@@ -1,44 +1,42 @@
 import React from 'react';
+import {View} from 'react-native';
 import {RootState} from '../../../redux';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {useSelector} from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feed from '../Feed/Feed';
 import Profile from '../Profile/Profile';
 import EmptyScreen from '../EmptyScreen/EmptyScreen';
 import styles from './styles';
-import {View} from 'react-native';
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 const Home = () => {
   const user = useSelector<RootState>(state => state.auth.currentUser);
   console.log(user);
   return (
     <View style={styles.container}>
-      <Tab.Navigator initialRouteName="Feed">
+      <Tab.Navigator initialRouteName="Feed" labeled={false}>
         <Tab.Screen
           name="Feed"
           component={Feed}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
+            tabBarIcon: ({color}) => (
+              <MaterialCommunityIcons name="home" color={color} size={26} />
             ),
-            headerShown: false,
           }}
         />
         <Tab.Screen
           name="Add"
           component={EmptyScreen}
           options={{
-            tabBarIcon: ({color, size}) => (
+            tabBarIcon: ({color}) => (
               <MaterialCommunityIcons
                 name="plus-circle"
                 color={color}
-                size={size}
+                size={26}
               />
             ),
-            headerShown: false,
           }}
           listeners={({navigation}) => ({
             tabPress: e => {
@@ -51,14 +49,9 @@ const Home = () => {
           name="Profile"
           component={Profile}
           options={{
-            tabBarIcon: ({color, size}) => (
-              <MaterialCommunityIcons
-                name="account"
-                color={color}
-                size={size}
-              />
+            tabBarIcon: ({color}) => (
+              <MaterialCommunityIcons name="account" color={color} size={26} />
             ),
-            headerShown: false,
           }}
         />
       </Tab.Navigator>
