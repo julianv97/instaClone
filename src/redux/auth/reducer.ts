@@ -6,7 +6,9 @@ import {
 } from './constants';
 
 const initialState = {
-  currentUser: null,
+  currentUser: {
+    email: '',
+  },
   authenticated: false,
 };
 
@@ -20,11 +22,18 @@ const authReducer = (state = initialState, action: Action) => {
     case SET_REGISTER_USER:
       return {
         ...state,
+        authenticated: true,
+        currentUser: {
+          email: action.payload.email,
+        },
       };
     case LOGIN_FULLFILLED:
       return {
         ...state,
         authenticated: true,
+        currentUser: {
+          email: action.payload.email,
+        },
       };
     default:
       return state;

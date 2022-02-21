@@ -17,7 +17,6 @@ export const registerUser = (data: IRegisterData, navigation: any) => {
           .then(() => {
             dispatch(setRegisterUser(data));
             navigation.navigate('Home');
-            console.log('user registered');
           });
       })
       .catch(error => {
@@ -42,7 +41,7 @@ export const loginUser = (data: ILoginData, navigation: any) => {
     auth
       .signInWithEmailAndPassword(data.email, data.password)
       .then(() => {
-        dispatch(setLoginUser());
+        dispatch(setLoginUser(data));
         navigation.navigate('Home');
       })
       .catch(error => {

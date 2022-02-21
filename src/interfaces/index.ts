@@ -13,3 +13,5 @@ export interface IUser {
   name: string;
   email: string;
 }
+
+export type RootState = ReturnType<typeof rootReducer>;

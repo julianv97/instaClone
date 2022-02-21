@@ -1,5 +1,5 @@
 import firebase from 'firebase/compat';
-import {IRegisterData} from '../../interfaces';
+import {IRegisterData, ILoginData} from '../../interfaces';
 import {
   SET_REGISTER_USER,
   SET_CURRENT_USER,
@@ -18,7 +18,7 @@ export const setRegisterUser = (data: IRegisterData) => ({
   payload: data,
 });
 
-export const setLoginUser = () => ({
+export const setLoginUser = (data: ILoginData) => ({
   type: LOGIN_FULLFILLED,
-  payload: null,
+  payload: data,
 });
