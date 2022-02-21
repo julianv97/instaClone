@@ -20,7 +20,13 @@ const MainStack: React.FC = () => {
         <Stack.Screen name="Landing" component={Landing} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen name="AddPost" component={AddPost} />
       </Stack.Navigator>
     </NavigationContainer>

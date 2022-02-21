@@ -6,6 +6,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Feed from '../Feed/Feed';
 import Profile from '../Profile/Profile';
 import EmptyScreen from '../EmptyScreen/EmptyScreen';
+import styles from './styles';
+import {View} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,48 +15,54 @@ const Home = () => {
   const user = useSelector<RootState>(state => state.auth.currentUser);
   console.log(user);
   return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Feed"
-        component={Feed}
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
-          headerShown: false,
-        }}
-      />
-      <Tab.Screen
-        name="Add"
-        component={EmptyScreen}
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="plus-circle"
-              color={color}
-              size={size}
-            />
-          ),
-          headerShown: false,
-        }}
-        listeners={({navigation}) => ({
-          tabPress: e => {
-            e.preventDefault();
-            navigation.navigate('AddPost');
-          },
-        })}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
-          ),
-          headerShown: false,
-        }}
-      />
-    </Tab.Navigator>
+    <View style={styles.container}>
+      <Tab.Navigator initialRouteName="Feed">
+        <Tab.Screen
+          name="Feed"
+          component={Feed}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+            headerShown: false,
+          }}
+        />
+        <Tab.Screen
+          name="Add"
+          component={EmptyScreen}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <MaterialCommunityIcons
+                name="plus-circle"
+                color={color}
+                size={size}
+              />
+            ),
+            headerShown: false,
+          }}
+          listeners={({navigation}) => ({
+            tabPress: e => {
+              e.preventDefault();
+              navigation.navigate('AddPost');
+            },
+          })}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <MaterialCommunityIcons
+                name="account"
+                color={color}
+                size={size}
+              />
+            ),
+            headerShown: false,
+          }}
+        />
+      </Tab.Navigator>
+    </View>
   );
 };
 
