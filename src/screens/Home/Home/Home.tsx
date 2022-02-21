@@ -25,7 +25,7 @@ const Home = () => {
         }}
       />
       <Tab.Screen
-        name="MainAdd"
+        name="Add"
         component={EmptyScreen}
         options={{
           tabBarIcon: ({color, size}) => (
