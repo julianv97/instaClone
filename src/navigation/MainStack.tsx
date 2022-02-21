@@ -1,15 +1,16 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../types/navigation';
 
 import Landing from '../screens/Auth/Landing/Landing';
 import Register from '../screens/Auth/Register/Register';
 import Login from '../screens/Auth/Login/Login';
 import Home from '../screens/Home/Home/Home';
 
-import {RootStackParamList} from '../types/navigation';
-
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
+// TODO: verificar cuando el usuario ya está logueado y redirigir a Home
 
 const MainStack: React.FC = () => {
   return (
