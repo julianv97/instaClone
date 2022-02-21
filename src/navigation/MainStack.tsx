@@ -7,6 +7,7 @@ import Landing from '../screens/Auth/Landing/Landing';
 import Register from '../screens/Auth/Register/Register';
 import Login from '../screens/Auth/Login/Login';
 import Home from '../screens/Home/Home/Home';
+import AddPost from '../screens/Home/AddPost/AddPost';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -20,6 +21,7 @@ const MainStack: React.FC = () => {
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="AddPost" component={AddPost} />
       </Stack.Navigator>
     </NavigationContainer>
   );
