@@ -32,6 +32,9 @@ const styles = StyleSheet.create({
     left: 21,
     zIndex: 100,
   },
+  image: {
+    flex: 1,
+  },
 });
 
 export default styles;

@@ -28,14 +28,7 @@ const AddPost: React.FC = () => {
           <View style={styles.button} />
         </TouchableWithoutFeedback>
       </RNCamera>
-      {image && (
-        <Image
-          source={{uri: image}}
-          style={{
-            flex: 1,
-          }}
-        />
-      )}
+      {image && <Image source={{uri: image}} style={styles.image} />}
     </View>
   );
 };
