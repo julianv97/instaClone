@@ -17,7 +17,7 @@ const pickerOptions = {
 
 const AddPost: React.FC = () => {
   const camRef = useRef<any>(null);
-  const [isCapturing, setIsCapturing] = useState(false);
+  const [isCapturing, setIsCapturing] = useState<boolean>(false);
   const [image, setSimage] = useState<string | undefined>(undefined);
 
   const buttonPress = async () => {
