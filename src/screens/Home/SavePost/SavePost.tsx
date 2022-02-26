@@ -25,7 +25,7 @@ const SavePost: React.FC<Props> = ({route, navigation}) => {
   });
   const dispatch = useDispatch();
 
-  const onSubmit = async () => {
+  const onSubmit = () => {
     dispatch(savePost(route.params.image, getValues().caption, navigation));
   };
 
