@@ -36,7 +36,7 @@ const SavePost: React.FC<Props> = ({route, navigation}) => {
         createdAt: new Date(),
       })
       .then(() => {
-        navigation.popToTop();
+        navigation.navigate('Home');
       })
       .catch(error => {
         console.log(error);
