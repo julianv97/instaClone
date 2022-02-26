@@ -5,7 +5,8 @@ import {RootStackParamList} from '../../../types/navigation';
 import {useForm, Controller} from 'react-hook-form';
 import styles from './styles';
 
-import {storage, auth, db} from '../../../helpers/firebase';
+import {useDispatch} from 'react-redux';
+import {savePost} from '../../../redux/posts/thunks';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'AddPost'>;
@@ -22,53 +23,10 @@ const SavePost: React.FC<Props> = ({route, navigation}) => {
       caption: '',
     },
   });
-
-  // TODO: implementar uuid
-  // TODO: pasar esta lógica a redux???
-
-  const savePostData = async (downloadURL: string) => {
-    db.collection('posts')
-      .doc(auth.currentUser?.uid)
-      .collection('userPosts')
-      .add({
-        image: downloadURL,
-        caption: getValues().caption,
-        createdAt: new Date(),
-      })
-      .then(() => {
-        navigation.navigate('Home');
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
+  const dispatch = useDispatch();
 
   const onSubmit = async () => {
-    const uri = route.params.image;
-    const childPath = `posts/${auth.currentUser?.uid}/${Math.random()
-      .toString(36)
-      .substring(2, 15)}`;
-    const response = await fetch(uri);
-    const blob = await response.blob();
-
-    const task = storage.ref().child(childPath).put(blob);
-
-    const taskProgress = (snapshot: {bytesTransferred: any}) => {
-      console.log('transferred: ', snapshot.bytesTransferred);
-    };
-
-    const taskComplete = () => {
-      task.snapshot.ref.getDownloadURL().then(downloadURL => {
-        savePostData(downloadURL);
-        console.log('downloadURL: ', downloadURL);
-      });
-    };
-
-    const taskError = (error: any) => {
-      console.log('error: ', error);
-    };
-
-    task.on('state_changed', taskProgress, taskError, taskComplete);
+    dispatch(savePost(route.params.image, getValues().caption, navigation));
   };
 
   return (
