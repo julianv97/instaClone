@@ -7,4 +7,7 @@ export type RootStackParamList = {
   Feed: undefined;
   Profile: undefined;
   AddPost: undefined;
+  SavePost: {
+    image: string | undefined;
+  };
 };

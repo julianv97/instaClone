@@ -8,6 +8,7 @@ import Register from '../screens/Auth/Register/Register';
 import Login from '../screens/Auth/Login/Login';
 import Home from '../screens/Home/Home/Home';
 import AddPost from '../screens/Home/AddPost/AddPost';
+import SavePost from '../screens/Home/SavePost/SavePost';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -28,6 +29,7 @@ const MainStack: React.FC = () => {
           }}
         />
         <Stack.Screen name="AddPost" component={AddPost} />
+        <Stack.Screen name="SavePost" component={SavePost} />
       </Stack.Navigator>
     </NavigationContainer>
   );

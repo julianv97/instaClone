@@ -4,6 +4,12 @@ import {RNCamera, TakePictureOptions} from 'react-native-camera';
 import {launchImageLibrary} from 'react-native-image-picker';
 import * as ImagePicker from 'react-native-image-picker';
 import styles from './styles';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../../types/navigation';
+
+interface Props {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'AddPost'>;
+}
 
 interface Action {
   title: string;
@@ -21,7 +27,7 @@ const pickerOptions: Action = {
   },
 };
 
-const AddPost: React.FC = () => {
+const AddPost: React.FC<Props> = ({navigation}) => {
   const camRef = useRef<any>(null);
   const [isCapturing, setIsCapturing] = useState<boolean>(false);
   const [image, setSimage] = useState<string | undefined>(undefined);
@@ -48,6 +54,11 @@ const AddPost: React.FC = () => {
     }
   };
 
+  /**
+   * TODO: Si hay imagen seleccionada que el botón de la cámara y el de la galería desaparezcan, si no hay imágen, que el botoón de Save Image no aparezca
+   *
+   */
+
   return (
     <View style={styles.container}>
       <RNCamera ref={camRef} style={styles.preview} captureAudio={false}>
@@ -57,6 +68,12 @@ const AddPost: React.FC = () => {
       </RNCamera>
       {image && <Image source={{uri: image}} style={styles.image} />}
       <Button title="Pick from your gallery" onPress={imagePickerHandler} />
+      <Button
+        title="Save Image"
+        onPress={() => {
+          navigation.navigate('SavePost', {image});
+        }}
+      />
     </View>
   );
 };
