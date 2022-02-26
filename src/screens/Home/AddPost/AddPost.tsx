@@ -61,19 +61,28 @@ const AddPost: React.FC<Props> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <RNCamera ref={camRef} style={styles.preview} captureAudio={false}>
-        <TouchableWithoutFeedback onPress={onTakePhotoHandler}>
-          <View style={styles.button} />
-        </TouchableWithoutFeedback>
-      </RNCamera>
-      {image && <Image source={{uri: image}} style={styles.image} />}
-      <Button title="Pick from your gallery" onPress={imagePickerHandler} />
-      <Button
-        title="Save Image"
-        onPress={() => {
-          navigation.navigate('SavePost', {image});
-        }}
-      />
+      {!image && (
+        <>
+          <RNCamera ref={camRef} style={styles.preview} captureAudio={false}>
+            <TouchableWithoutFeedback onPress={onTakePhotoHandler}>
+              <View style={styles.button} />
+            </TouchableWithoutFeedback>
+          </RNCamera>
+          <Button title="Pick from your gallery" onPress={imagePickerHandler} />
+        </>
+      )}
+
+      {image && (
+        <>
+          <Image source={{uri: image}} style={styles.image} />
+          <Button
+            title="New Post"
+            onPress={() => {
+              navigation.navigate('SavePost', {image});
+            }}
+          />
+        </>
+      )}
     </View>
   );
 };
