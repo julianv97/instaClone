@@ -54,11 +54,6 @@ const AddPost: React.FC<Props> = ({navigation}) => {
     }
   };
 
-  /**
-   * TODO: Si hay imagen seleccionada que el botón de la cámara y el de la galería desaparezcan, si no hay imágen, que el botoón de Save Image no aparezca
-   *
-   */
-
   return (
     <View style={styles.container}>
       {!image && (
