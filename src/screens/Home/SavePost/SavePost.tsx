@@ -5,7 +5,7 @@ import {RootStackParamList} from '../../../types/navigation';
 import {useForm, Controller} from 'react-hook-form';
 import styles from './styles';
 
-import {storage, auth} from '../../../helpers/firebase';
+import {storage, auth, db} from '../../../helpers/firebase';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'AddPost'>;
@@ -16,13 +16,33 @@ interface Props {
   };
 }
 
-const SavePost: React.FC<Props> = ({route}) => {
-  const {control, handleSubmit} = useForm({
+const SavePost: React.FC<Props> = ({route, navigation}) => {
+  const {control, handleSubmit, getValues} = useForm({
     defaultValues: {
       caption: '',
     },
   });
+
   // TODO: implementar uuid
+  // TODO: pasar esta lógica a redux???
+
+  const savePostData = async (downloadURL: string) => {
+    db.collection('posts')
+      .doc(auth.currentUser?.uid)
+      .collection('userPosts')
+      .add({
+        image: downloadURL,
+        caption: getValues().caption,
+        createdAt: new Date(),
+      })
+      .then(() => {
+        navigation.popToTop();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   const onSubmit = async () => {
     const uri = route.params.image;
     const childPath = `posts/${auth.currentUser?.uid}/${Math.random()
@@ -39,6 +59,7 @@ const SavePost: React.FC<Props> = ({route}) => {
 
     const taskComplete = () => {
       task.snapshot.ref.getDownloadURL().then(downloadURL => {
+        savePostData(downloadURL);
         console.log('downloadURL: ', downloadURL);
       });
     };
