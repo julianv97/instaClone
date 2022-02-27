@@ -15,26 +15,24 @@ import {ILoginData, IRegisterData} from '@interfaces/index';
 import {Action} from '@customTypes/redux';
 
 export const registerUser = (data: IRegisterData, navigation: any) => {
-  return (dispatch: (action: Action) => void) => {
+  return async (dispatch: (action: Action) => void) => {
     dispatch(registerUserPending());
-    return auth
-      .createUserWithEmailAndPassword(data.email, data.password)
-      .then(() => {
-        db.collection('users')
-          .doc(auth.currentUser?.uid)
-          .set({
-            name: data.name,
-            email: data.email,
-          })
-          .then(() => {
-            dispatch(registerUserFullFill(data));
-            navigation.navigate('Home');
-          });
-      })
-      .catch(error => {
-        dispatch(registerUserRejected());
-        console.log(error);
-      });
+    try {
+      await auth.createUserWithEmailAndPassword(data.email, data.password);
+      db.collection('users')
+        .doc(auth.currentUser?.uid)
+        .set({
+          name: data.name,
+          email: data.email,
+        })
+        .then(() => {
+          dispatch(registerUserFullFill(data));
+          navigation.navigate('Home');
+        });
+    } catch (error) {
+      dispatch(registerUserRejected());
+      console.log(error);
+    }
   };
 };
 
