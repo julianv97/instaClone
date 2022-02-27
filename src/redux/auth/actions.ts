@@ -4,6 +4,8 @@ import {
   SET_REGISTER_USER,
   SET_CURRENT_USER,
   LOGIN_FULLFILLED,
+  LOGIN_PENDING,
+  LOGIN_REJECTED,
   LOGOUT_FULLFILLED,
   LOGOUT_PENDING,
   LOGOUT_REJECTED,
@@ -21,9 +23,17 @@ export const setRegisterUser = (data: IRegisterData) => ({
   payload: data,
 });
 
-export const setLoginUser = (data: ILoginData) => ({
+export const setLoginUserFullfill = (data: ILoginData) => ({
   type: LOGIN_FULLFILLED,
   payload: data,
+});
+
+export const setLoginUserPending = () => ({
+  type: LOGIN_PENDING,
+});
+
+export const setLoginUserRejected = () => ({
+  type: LOGIN_REJECTED,
 });
 
 export const setLogoutUserFullfill = () => ({

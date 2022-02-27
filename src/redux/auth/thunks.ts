@@ -2,7 +2,9 @@ import {auth, db} from '@helpers/firebase';
 import {
   setRegisterUser,
   setCurrentUser,
-  setLoginUser,
+  setLoginUserFullfill,
+  setLoginUserPending,
+  setLoginUserRejected,
   setLogoutUserFullfill,
   setLogoutUserPending,
   setLogoutUserRejected,
@@ -46,13 +48,15 @@ export const getCurrentUser = () => {
 
 export const loginUser = (data: ILoginData, navigation: any) => {
   return (dispatch: (action: Action) => void) => {
+    dispatch(setLoginUserPending());
     auth
       .signInWithEmailAndPassword(data.email, data.password)
       .then(() => {
-        dispatch(setLoginUser(data));
+        dispatch(setLoginUserFullfill(data));
         navigation.navigate('Home');
       })
       .catch(error => {
+        dispatch(setLoginUserRejected());
         console.log(error);
       });
   };

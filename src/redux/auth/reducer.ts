@@ -4,6 +4,8 @@ import {
   SET_REGISTER_USER,
   SET_CURRENT_USER,
   LOGIN_FULLFILLED,
+  LOGIN_PENDING,
+  LOGIN_REJECTED,
   LOGOUT_FULLFILLED,
   LOGOUT_PENDING,
   LOGOUT_REJECTED,
@@ -33,13 +35,26 @@ const authReducer = (state = initialState, action: Action) => {
           email: action.payload.email,
         },
       };
+
     case LOGIN_FULLFILLED:
       return {
         ...state,
+        isLoading: false,
         authenticated: true,
         currentUser: {
           email: action.payload.email,
         },
+      };
+    case LOGIN_PENDING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case LOGIN_REJECTED:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
       };
 
     case LOGOUT_FULLFILLED:
