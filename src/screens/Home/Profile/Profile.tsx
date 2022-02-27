@@ -3,7 +3,7 @@ import {View, Text, Button} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {logoutUser} from '../../../redux/auth/thunks';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../types/navigation';
+import {RootStackParamList} from '../../../customTypes/navigation';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Profile'>;

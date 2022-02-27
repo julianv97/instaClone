@@ -16,7 +16,13 @@
     "suppressImplicitAnyIndexErrors": true,
     "strictNullChecks": true,
     "paths": {
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@navigation/*": ["src/navigation/*"],
+      "@redux/*": ["src/redux/*"],
+      "@screens/*": ["src/screens/*"],
+      "@customTypes/*": ["src/customTypes/*"]
     }
   },
   "exclude": [

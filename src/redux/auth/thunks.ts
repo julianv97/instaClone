@@ -1,12 +1,12 @@
-import {createUserWithEmailAndPassword} from 'firebase/auth';
-import {auth, db} from '../../helpers/firebase';
+import {auth, db} from '@helpers/firebase';
 import {setRegisterUser, setCurrentUser, setLoginUser} from './actions';
-import {ILoginData, IRegisterData} from '../../interfaces';
-import {Action} from '../../types/redux';
+import {ILoginData, IRegisterData} from '@interfaces/index';
+import {Action} from '@customTypes/redux';
 
 export const registerUser = (data: IRegisterData, navigation: any) => {
   return (dispatch: (action: Action) => void) => {
-    return createUserWithEmailAndPassword(auth, data.email, data.password)
+    return auth
+      .createUserWithEmailAndPassword(data.email, data.password)
       .then(() => {
         db.collection('users')
           .doc(auth.currentUser?.uid)

@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Image, Button} from 'react-native';
 import Field from '../../../components/Field/Field';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../types/navigation';
+import {RootStackParamList} from '../../../customTypes/navigation';
 import {useForm} from 'react-hook-form';
 import {useDispatch} from 'react-redux';
 import {savePost} from '../../../redux/posts/thunks';

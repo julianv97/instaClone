@@ -1,5 +1,5 @@
 import {IInitialStateAuth} from '../../interfaces';
-import {Action} from '../../types/redux';
+import {Action} from '../../customTypes/redux';
 import {
   SET_REGISTER_USER,
   SET_CURRENT_USER,

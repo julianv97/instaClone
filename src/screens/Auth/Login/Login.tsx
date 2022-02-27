@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, Button} from 'react-native';
 import {useForm} from 'react-hook-form';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../types/navigation';
+import {RootStackParamList} from '../../../customTypes/navigation';
 import {ILoginData} from '../../../interfaces';
 import {useDispatch} from 'react-redux';
 import {loginUser} from '../../../redux/auth/thunks';

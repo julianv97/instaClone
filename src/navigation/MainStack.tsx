@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../types/navigation';
+import {RootStackParamList} from '../customTypes/navigation';
 
 import Landing from '../screens/Auth/Landing/Landing';
 import Register from '../screens/Auth/Register/Register';

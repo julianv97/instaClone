@@ -5,7 +5,7 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import * as ImagePicker from 'react-native-image-picker';
 import styles from './styles';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../types/navigation';
+import {RootStackParamList} from '../../../customTypes/navigation';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'AddPost'>;

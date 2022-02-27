@@ -5,7 +5,7 @@ import {registerUser} from '../../../redux/auth/thunks';
 import {useDispatch} from 'react-redux';
 import {IRegisterData} from '../../../interfaces';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../types/navigation';
+import {RootStackParamList} from '../../../customTypes/navigation';
 import Field from 'src/components/Field/Field';
 
 interface Props {
