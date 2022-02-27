@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
+import {Button} from 'react-native';
 import {useForm} from 'react-hook-form';
 import {useDispatch} from 'react-redux';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '@customTypes/navigation';
 import {ILoginData} from '@interfaces/index';
 import {loginUser} from '@redux/auth/thunks';
+import FormLayout from '@components/FormLayout/FormLayout';
 import Field from '@components/Field/Field';
 
 interface Props {
@@ -31,9 +32,7 @@ const Login: React.FC<Props> = ({navigation}) => {
   };
 
   return (
-    <View>
-      <Text>Login</Text>
-
+    <FormLayout>
       <Field
         control={control}
         name="email"
@@ -59,7 +58,7 @@ const Login: React.FC<Props> = ({navigation}) => {
       />
 
       <Button title="Sign in" onPress={handleSubmit(onSubmit)} />
-    </View>
+    </FormLayout>
   );
 };
 
