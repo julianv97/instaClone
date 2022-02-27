@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, Button} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {logoutUser} from '../../../redux/auth/thunks';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../customTypes/navigation';
+import {useDispatch} from 'react-redux';
+import {logoutUser} from '@redux/auth/thunks';
+import {RootStackParamList} from '@customTypes/navigation';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Settings'>;

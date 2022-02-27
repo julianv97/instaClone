@@ -1,14 +1,14 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../customTypes/navigation';
+import {RootStackParamList} from '@customTypes/navigation';
 
-import Landing from '../screens/Auth/Landing/Landing';
-import Register from '../screens/Auth/Register/Register';
-import Login from '../screens/Auth/Login/Login';
-import Home from '../screens/Home/Home/Home';
-import AddPost from '../screens/Home/AddPost/AddPost';
-import SavePost from '../screens/Home/SavePost/SavePost';
+import Landing from '@screens/Auth/Landing/Landing';
+import Register from '@screens/Auth/Register/Register';
+import Login from '@screens/Auth/Login/Login';
+import Home from '@screens/Home/Home/Home';
+import AddPost from '@screens/Home/AddPost/AddPost';
+import SavePost from '@screens/Home/SavePost/SavePost';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

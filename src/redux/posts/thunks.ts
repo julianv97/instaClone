@@ -1,7 +1,7 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Action} from 'redux';
-import {storage, db, auth} from '../../helpers/firebase';
-import {RootStackParamList} from '../../customTypes/navigation';
+import {storage, db, auth} from '@helpers/firebase';
+import {RootStackParamList} from '@customTypes/navigation';
 import {savePostPending, savePostFullFill, savePostRejected} from './actions';
 
 export const savePost = (

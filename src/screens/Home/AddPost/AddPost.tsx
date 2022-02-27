@@ -3,9 +3,9 @@ import {View, TouchableWithoutFeedback, Image, Button} from 'react-native';
 import {RNCamera, TakePictureOptions} from 'react-native-camera';
 import {launchImageLibrary} from 'react-native-image-picker';
 import * as ImagePicker from 'react-native-image-picker';
-import styles from './styles';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../customTypes/navigation';
+import {RootStackParamList} from '@customTypes/navigation';
+import styles from './styles';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'AddPost'>;

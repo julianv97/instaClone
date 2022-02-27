@@ -1,11 +1,9 @@
-import {View, Button} from 'react-native';
 import React from 'react';
-
+import {View, Button} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../customTypes/navigation';
-
 import {useSelector} from 'react-redux';
-import {RootState} from '../../../redux';
+import {RootStackParamList} from '@customTypes/navigation';
+import {RootState} from '@redux/index';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Landing'>;

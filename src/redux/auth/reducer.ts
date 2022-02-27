@@ -1,4 +1,4 @@
-import {IInitialStateAuth} from '../../interfaces';
+import {IInitialStateAuth} from '@interfaces/index';
 import {Action} from '../../customTypes/redux';
 import {
   SET_REGISTER_USER,

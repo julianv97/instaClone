@@ -1,5 +1,5 @@
-import {IInitialStatePosts} from '../../interfaces';
-import {Action} from '../../customTypes/redux';
+import {IInitialStatePosts} from '@interfaces/index';
+import {Action} from '@customTypes/redux';
 import {
   SAVE_POST_FULLFILLED,
   SAVE_POST_PENDING,

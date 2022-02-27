@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, Text, Button} from 'react-native';
 import {useForm} from 'react-hook-form';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../customTypes/navigation';
-import {ILoginData} from '../../../interfaces';
 import {useDispatch} from 'react-redux';
-import {loginUser} from '../../../redux/auth/thunks';
-import Field from '../../../components/Field/Field';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '@customTypes/navigation';
+import {ILoginData} from '@interfaces/index';
+import {loginUser} from '@redux/auth/thunks';
+import Field from '@components/Field/Field';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Landing'>;

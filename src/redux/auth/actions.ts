@@ -1,5 +1,5 @@
 import firebase from 'firebase/compat';
-import {IRegisterData, ILoginData} from '../../interfaces';
+import {IRegisterData, ILoginData} from '@interfaces/index';
 import {
   SET_REGISTER_USER,
   SET_CURRENT_USER,

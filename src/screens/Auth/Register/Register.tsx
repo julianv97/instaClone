@@ -1,12 +1,12 @@
-import {View, Text, Button} from 'react-native';
 import React from 'react';
+import {View, Text, Button} from 'react-native';
 import {useForm} from 'react-hook-form';
-import {registerUser} from '../../../redux/auth/thunks';
 import {useDispatch} from 'react-redux';
-import {IRegisterData} from '../../../interfaces';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../customTypes/navigation';
-import Field from 'src/components/Field/Field';
+import {RootStackParamList} from '@customTypes/navigation';
+import {registerUser} from '@redux/auth/thunks';
+import {IRegisterData} from '@interfaces/index';
+import Field from '@components/Field/Field';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Register'>;
