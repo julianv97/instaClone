@@ -4,6 +4,9 @@ import {
   SET_REGISTER_USER,
   SET_CURRENT_USER,
   LOGIN_FULLFILLED,
+  LOGOUT_FULLFILLED,
+  LOGOUT_PENDING,
+  LOGOUT_REJECTED,
 } from './constants';
 
 const initialState: IInitialStateAuth = {
@@ -11,6 +14,8 @@ const initialState: IInitialStateAuth = {
     email: '',
   },
   authenticated: false,
+  isLoading: false,
+  isError: false,
 };
 
 const authReducer = (state = initialState, action: Action) => {
@@ -36,6 +41,28 @@ const authReducer = (state = initialState, action: Action) => {
           email: action.payload.email,
         },
       };
+
+    case LOGOUT_FULLFILLED:
+      return {
+        ...state,
+        isLoading: false,
+        authenticated: false,
+        currentUser: {
+          email: '',
+        },
+      };
+    case LOGOUT_PENDING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case LOGOUT_REJECTED:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+
     default:
       return state;
   }

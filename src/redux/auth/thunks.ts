@@ -1,5 +1,12 @@
 import {auth, db} from '@helpers/firebase';
-import {setRegisterUser, setCurrentUser, setLoginUser} from './actions';
+import {
+  setRegisterUser,
+  setCurrentUser,
+  setLoginUser,
+  setLogoutUserFullfill,
+  setLogoutUserPending,
+  setLogoutUserRejected,
+} from './actions';
 import {ILoginData, IRegisterData} from '@interfaces/index';
 import {Action} from '@customTypes/redux';
 
@@ -53,13 +60,15 @@ export const loginUser = (data: ILoginData, navigation: any) => {
 
 export const logoutUser = () => {
   return (dispatch: (action: Action) => void) => {
+    dispatch(setLogoutUserPending());
     auth
       .signOut()
       .then(() => {
-        dispatch(setCurrentUser({}));
+        dispatch(setLogoutUserFullfill());
       })
       .catch(error => {
         console.log(error);
+        dispatch(setLogoutUserRejected());
       });
   };
 };

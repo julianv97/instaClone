@@ -9,6 +9,10 @@ export interface ILoginData {
   password: string;
 }
 
+export interface ICurrentUser {
+  email: string;
+}
+
 export interface IUser {
   name: string;
   email: string;
@@ -19,6 +23,8 @@ export interface IInitialStateAuth {
   currentUser: {
     email: string;
   };
+  isLoading: boolean;
+  isError: boolean;
 }
 
 export interface IInitialStatePosts {

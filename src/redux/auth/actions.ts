@@ -4,6 +4,9 @@ import {
   SET_REGISTER_USER,
   SET_CURRENT_USER,
   LOGIN_FULLFILLED,
+  LOGOUT_FULLFILLED,
+  LOGOUT_PENDING,
+  LOGOUT_REJECTED,
 } from './constants';
 
 export const setCurrentUser = (
@@ -21,4 +24,16 @@ export const setRegisterUser = (data: IRegisterData) => ({
 export const setLoginUser = (data: ILoginData) => ({
   type: LOGIN_FULLFILLED,
   payload: data,
+});
+
+export const setLogoutUserFullfill = () => ({
+  type: LOGOUT_FULLFILLED,
+});
+
+export const setLogoutUserPending = () => ({
+  type: LOGOUT_PENDING,
+});
+
+export const setLogoutUserRejected = () => ({
+  type: LOGOUT_REJECTED,
 });
