@@ -35,7 +35,7 @@ const Field: React.FC<Props> = ({
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
-            style={styles.input}
+            style={error ? [styles.input, styles.error] : styles.input}
             textContentType={textContentType}
             secureTextEntry={secureTextEntry}
           />

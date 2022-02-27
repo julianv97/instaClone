@@ -8,6 +8,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#000',
   },
+  error: {
+    borderColor: 'red',
+  },
 });
 
 export default styles;
