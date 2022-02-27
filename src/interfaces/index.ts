@@ -14,4 +14,15 @@ export interface IUser {
   email: string;
 }
 
-export type RootState = ReturnType<typeof rootReducer>;
+export interface IInitialStateAuth {
+  authenticated: boolean;
+  currentUser: {
+    email: string;
+  };
+}
+
+export interface IInitialStatePosts {
+  isLoading: boolean;
+  isError: boolean;
+  imageToUpload: string;
+}

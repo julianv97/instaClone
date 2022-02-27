@@ -1,3 +1,4 @@
+import {IInitialStatePosts} from '../../interfaces';
 import {Action} from '../../types/redux';
 import {
   SAVE_POST_FULLFILLED,
@@ -5,8 +6,8 @@ import {
   SAVE_POST_REJECTED,
 } from './constants';
 
-const initialState = {
-  imageToUpload: null,
+const initialState: IInitialStatePosts = {
+  imageToUpload: '',
   isLoading: false,
   isError: false,
 };

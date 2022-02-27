@@ -1,3 +1,4 @@
+import {IInitialStateAuth} from '../../interfaces';
 import {Action} from '../../types/redux';
 import {
   SET_REGISTER_USER,
@@ -5,7 +6,7 @@ import {
   LOGIN_FULLFILLED,
 } from './constants';
 
-const initialState = {
+const initialState: IInitialStateAuth = {
   currentUser: {
     email: '',
   },
