@@ -11,7 +11,7 @@ import styles from './styles';
 
 const Tab = createMaterialBottomTabNavigator();
 
-const Home = () => {
+const Home: React.FC = () => {
   const user = useSelector<RootState>(state => state.auth.currentUser);
   console.log(user);
   return (
