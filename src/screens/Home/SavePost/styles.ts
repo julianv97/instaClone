@@ -7,13 +7,6 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
   },
-  input: {
-    margin: 10,
-    padding: 10,
-    fontSize: 20,
-    borderWidth: 1,
-    borderColor: '#000',
-  },
 });
 
 export default styles;

@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, Text, TextInput, Button} from 'react-native';
-import {useForm, Controller} from 'react-hook-form';
+import {View, Text, Button} from 'react-native';
+import {useForm} from 'react-hook-form';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../types/navigation';
 import {ILoginData} from '../../../interfaces';
 import {useDispatch} from 'react-redux';
 import {loginUser} from '../../../redux/auth/thunks';
+import Field from '../../../components/Field/Field';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Landing'>;
@@ -33,43 +34,29 @@ const Login: React.FC<Props> = ({navigation}) => {
     <View>
       <Text>Login</Text>
 
-      <Controller
+      <Field
         control={control}
-        rules={{
-          required: true,
-        }}
-        render={({field: {onChange, onBlur, value}}) => (
-          <TextInput
-            placeholder="email"
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-          />
-        )}
         name="email"
-      />
-
-      {errors.email && <Text>This is required.</Text>}
-
-      <Controller
-        control={control}
+        placeholder="email"
+        error={errors.email}
+        errorMessage="Email is required"
         rules={{
           required: true,
         }}
-        render={({field: {onChange, onBlur, value}}) => (
-          <TextInput
-            placeholder="password"
-            textContentType="password"
-            secureTextEntry={true}
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-          />
-        )}
-        name="password"
       />
 
-      {errors.password && <Text>This is required.</Text>}
+      <Field
+        control={control}
+        name="password"
+        placeholder="password"
+        textContentType="password"
+        secureTextEntry={true}
+        rules={{
+          required: true,
+        }}
+        error={errors.password}
+        errorMessage="Password is required"
+      />
 
       <Button title="Sign in" onPress={handleSubmit(onSubmit)} />
     </View>
