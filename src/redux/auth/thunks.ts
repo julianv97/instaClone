@@ -1,6 +1,8 @@
 import {auth, db} from '@helpers/firebase';
 import {
-  setRegisterUser,
+  registerUserFullFill,
+  registerUserPending,
+  registerUserRejected,
   setCurrentUser,
   setLoginUserFullfill,
   setLoginUserPending,
@@ -14,6 +16,7 @@ import {Action} from '@customTypes/redux';
 
 export const registerUser = (data: IRegisterData, navigation: any) => {
   return (dispatch: (action: Action) => void) => {
+    dispatch(registerUserPending());
     return auth
       .createUserWithEmailAndPassword(data.email, data.password)
       .then(() => {
@@ -24,11 +27,12 @@ export const registerUser = (data: IRegisterData, navigation: any) => {
             email: data.email,
           })
           .then(() => {
-            dispatch(setRegisterUser(data));
+            dispatch(registerUserFullFill(data));
             navigation.navigate('Home');
           });
       })
       .catch(error => {
+        dispatch(registerUserRejected());
         console.log(error);
       });
   };

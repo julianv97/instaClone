@@ -1,7 +1,9 @@
 import firebase from 'firebase/compat';
 import {IRegisterData, ILoginData} from '@interfaces/index';
 import {
-  SET_REGISTER_USER,
+  REGISTER_USER_FULLFILLED,
+  REGISTER_USER_PENDING,
+  REGISTER_USER_REJECTED,
   SET_CURRENT_USER,
   LOGIN_FULLFILLED,
   LOGIN_PENDING,
@@ -18,9 +20,17 @@ export const setCurrentUser = (
   payload: data,
 });
 
-export const setRegisterUser = (data: IRegisterData) => ({
-  type: SET_REGISTER_USER,
+export const registerUserFullFill = (data: IRegisterData) => ({
+  type: REGISTER_USER_FULLFILLED,
   payload: data,
+});
+
+export const registerUserPending = () => ({
+  type: REGISTER_USER_PENDING,
+});
+
+export const registerUserRejected = () => ({
+  type: REGISTER_USER_REJECTED,
 });
 
 export const setLoginUserFullfill = (data: ILoginData) => ({

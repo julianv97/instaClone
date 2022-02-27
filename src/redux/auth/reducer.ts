@@ -1,7 +1,7 @@
 import {IInitialStateAuth} from '@interfaces/index';
 import {Action} from '../../customTypes/redux';
 import {
-  SET_REGISTER_USER,
+  REGISTER_USER_FULLFILLED,
   SET_CURRENT_USER,
   LOGIN_FULLFILLED,
   LOGIN_PENDING,
@@ -27,9 +27,10 @@ const authReducer = (state = initialState, action: Action) => {
         ...state,
         currentUser: action.payload,
       };
-    case SET_REGISTER_USER:
+    case REGISTER_USER_FULLFILLED:
       return {
         ...state,
+        isLoading: false,
         authenticated: true,
         currentUser: {
           email: action.payload.email,
