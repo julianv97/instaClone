@@ -1,12 +1,12 @@
-import {View, TextInput, Image, Button} from 'react-native';
 import React from 'react';
+import {View, Image, Button} from 'react-native';
+import Field from '../../../components/Field/Field';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../types/navigation';
-import {useForm, Controller} from 'react-hook-form';
-import styles from './styles';
-
+import {useForm} from 'react-hook-form';
 import {useDispatch} from 'react-redux';
 import {savePost} from '../../../redux/posts/thunks';
+import styles from './styles';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'AddPost'>;
@@ -31,18 +31,10 @@ const SavePost: React.FC<Props> = ({route, navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Controller
+      <Field
         control={control}
-        render={({field: {onChange, onBlur, value}}) => (
-          <TextInput
-            placeholder="Write a caption..."
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-            style={styles.input}
-          />
-        )}
         name="caption"
+        placeholder="Write a caption..."
       />
       <Image
         source={{
