@@ -6,7 +6,7 @@ import {useDispatch} from 'react-redux';
 import {IRegisterData} from '../../../interfaces';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../types/navigation';
-import Field from '../../../components/Field/Field';
+import Field from 'src/components/Field/Field';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Register'>;
