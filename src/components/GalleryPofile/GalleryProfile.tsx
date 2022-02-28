@@ -1,6 +1,6 @@
-import {IPost} from '@interfaces/index';
 import React from 'react';
 import {FlatList, RefreshControl} from 'react-native';
+import {IPost} from '@interfaces/index';
 import PostGallery from '@components/PostGalley/PostGallery';
 import styles from './styles';
 
