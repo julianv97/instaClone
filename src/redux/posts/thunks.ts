@@ -63,31 +63,22 @@ export const savePost = (
 export const getPosts = () => {
   return (dispatch: (action: Action) => void) => {
     dispatch(getPostPending());
-    try {
-      db.collection('posts')
-        .doc(auth.currentUser?.uid)
-        .collection('userPosts')
-        .orderBy('createdAt', 'desc')
-        .onSnapshot(snapshot => {
-          const posts: {
-            id: string;
-            image: any;
-            caption: any;
-            createdAt: any;
-          }[] = [];
-          snapshot.forEach(doc => {
-            posts.push({
-              id: doc.id,
-              image: doc.data().image,
-              caption: doc.data().caption,
-              createdAt: doc.data().createdAt,
-            });
-          });
-          dispatch(getPostFullfill(posts));
+    db.collection('posts')
+      .doc(auth.currentUser?.uid)
+      .collection('userPosts')
+      .get()
+      .then(snapshot => {
+        const posts = snapshot.docs.map(doc => {
+          return {
+            id: doc.id,
+            ...doc.data(),
+          };
         });
-    } catch (error) {
-      dispatch(getPostRejected());
-      console.log(error);
-    }
+        dispatch(getPostFullfill(posts));
+      })
+      .catch(error => {
+        dispatch(getPostRejected());
+        console.log(error);
+      });
   };
 };
