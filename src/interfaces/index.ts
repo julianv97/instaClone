@@ -31,4 +31,5 @@ export interface IInitialStatePosts {
   isLoading: boolean;
   isError: boolean;
   imageToUpload: string;
+  posts: [];
 }

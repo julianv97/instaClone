@@ -2,7 +2,14 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Action} from 'redux';
 import {storage, db, auth} from '@helpers/firebase';
 import {RootStackParamList} from '@customTypes/navigation';
-import {savePostPending, savePostFullFill, savePostRejected} from './actions';
+import {
+  savePostPending,
+  savePostFullFill,
+  savePostRejected,
+  getPostFullfill,
+  getPostPending,
+  getPostRejected,
+} from './actions';
 
 export const savePost = (
   imageToUpload: string,
@@ -50,5 +57,37 @@ export const savePost = (
     };
 
     task.on('state_changed', taskProgress, taskError, taskComplete);
+  };
+};
+
+export const getPosts = () => {
+  return (dispatch: (action: Action) => void) => {
+    dispatch(getPostPending());
+    try {
+      db.collection('posts')
+        .doc(auth.currentUser?.uid)
+        .collection('userPosts')
+        .orderBy('createdAt', 'desc')
+        .onSnapshot(snapshot => {
+          const posts: {
+            id: string;
+            image: any;
+            caption: any;
+            createdAt: any;
+          }[] = [];
+          snapshot.forEach(doc => {
+            posts.push({
+              id: doc.id,
+              image: doc.data().image,
+              caption: doc.data().caption,
+              createdAt: doc.data().createdAt,
+            });
+          });
+          dispatch(getPostFullfill(posts));
+        });
+    } catch (error) {
+      dispatch(getPostRejected());
+      console.log(error);
+    }
   };
 };

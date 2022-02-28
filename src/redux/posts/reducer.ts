@@ -4,12 +4,16 @@ import {
   SAVE_POST_FULLFILLED,
   SAVE_POST_PENDING,
   SAVE_POST_REJECTED,
+  GET_POSTS_FULLFILLED,
+  GET_POSTS_PENDING,
+  GET_POSTS_REJECTED,
 } from './constants';
 
 const initialState: IInitialStatePosts = {
   imageToUpload: '',
   isLoading: false,
   isError: false,
+  posts: [],
 };
 
 const postsReducer = (state = initialState, action: Action) => {
@@ -25,6 +29,23 @@ const postsReducer = (state = initialState, action: Action) => {
         isLoading: false,
       };
     case SAVE_POST_REJECTED:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    case GET_POSTS_FULLFILLED:
+      return {
+        ...state,
+        isLoading: false,
+        posts: action.payload,
+      };
+    case GET_POSTS_PENDING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case GET_POSTS_REJECTED:
       return {
         ...state,
         isLoading: false,
