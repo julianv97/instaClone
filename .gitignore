@@ -60,4 +60,5 @@ buck-out/
 /ios/Pods/
 
 
+todo.txt
 .env 
