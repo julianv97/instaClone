@@ -61,12 +61,14 @@ export const savePost = (
   };
 };
 
-export const getPosts = () => {
+export const getPosts = (setRefresh: any) => {
   return (dispatch: (action: Action) => void) => {
     dispatch(getPostPending());
+    setRefresh(true);
     db.collection('posts')
       .doc(auth.currentUser?.uid)
       .collection('userPosts')
+      .orderBy('createdAt', 'desc')
       .get()
       .then(snapshot => {
         const posts: IPost[] = snapshot.docs.map(doc => {
@@ -78,6 +80,7 @@ export const getPosts = () => {
           };
         });
         dispatch(getPostFullfill(posts));
+        setRefresh(false);
       })
       .catch(error => {
         dispatch(getPostRejected());
