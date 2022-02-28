@@ -6,6 +6,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '@redux/index';
 import Feed from '../Feed/Feed';
 import Profile from '../Profile/Profile';
+import Search from '../Search/Search';
 import EmptyScreen from '../EmptyScreen/EmptyScreen';
 import styles from './styles';
 
@@ -26,6 +27,17 @@ const Home: React.FC = () => {
             ),
           }}
         />
+
+        <Tab.Screen
+          name="Search"
+          component={Search}
+          options={{
+            tabBarIcon: ({color}) => (
+              <MaterialCommunityIcons name="magnify" color={color} size={26} />
+            ),
+          }}
+        />
+
         <Tab.Screen
           name="Add"
           component={EmptyScreen}

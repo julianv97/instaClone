@@ -12,6 +12,7 @@ interface Props {
   errorMessage?: string;
   textContentType?: any;
   secureTextEntry?: boolean;
+  customOnChangeText?: any;
 }
 
 const Field: React.FC<Props> = ({
@@ -23,6 +24,7 @@ const Field: React.FC<Props> = ({
   errorMessage,
   textContentType,
   secureTextEntry,
+  customOnChangeText,
 }) => {
   return (
     <>
@@ -33,7 +35,10 @@ const Field: React.FC<Props> = ({
           <TextInput
             placeholder={placeholder}
             onBlur={onBlur}
-            onChangeText={onChange}
+            onChangeText={text => {
+              onChange(text);
+              customOnChangeText ? customOnChangeText(text) : onChange(text);
+            }}
             value={value}
             style={error ? [styles.input, styles.error] : styles.input}
             textContentType={textContentType}
