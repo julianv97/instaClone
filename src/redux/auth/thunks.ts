@@ -1,4 +1,5 @@
 import {auth, db} from '@helpers/firebase';
+import {setDataAsyncStorage} from '@helpers/asyncStorage';
 import {
   registerUserFullFill,
   registerUserPending,
@@ -43,6 +44,7 @@ export const getCurrentUser = () => {
       .doc(auth.currentUser?.uid)
       .get()
       .then(doc => {
+        console.log('dsads', auth.currentUser?.uid);
         dispatch(setCurrentUser(doc.data()));
       });
   };
@@ -55,6 +57,7 @@ export const loginUser = (data: ILoginData, navigation: any) => {
       .signInWithEmailAndPassword(data.email, data.password)
       .then(() => {
         dispatch(setLoginUserFullfill(data));
+        setDataAsyncStorage('user', data.email);
         navigation.navigate('Home');
       })
       .catch(error => {
@@ -70,6 +73,7 @@ export const logoutUser = () => {
     auth
       .signOut()
       .then(() => {
+        setDataAsyncStorage('user', '');
         dispatch(setLogoutUserFullfill());
       })
       .catch(error => {

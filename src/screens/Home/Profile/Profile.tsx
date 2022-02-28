@@ -25,7 +25,7 @@ const Profile: React.FC<Props> = ({navigation}) => {
   useEffect(() => {
     dispatch(getCurrentUser());
     dispatch(getPosts(setRefreshing));
-  }, [dispatch]);
+  }, [dispatch, user, setRefreshing]);
 
   const handleRefresh = () => {
     dispatch(getPosts(setRefreshing));
@@ -39,7 +39,7 @@ const Profile: React.FC<Props> = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.containerInfo}>
-        <Text>{user.name}</Text>
+        <Text>{user?.name}</Text>
       </View>
 
       <GalleryProfile

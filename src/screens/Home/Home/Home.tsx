@@ -2,8 +2,6 @@ import React from 'react';
 import {View} from 'react-native';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useSelector} from 'react-redux';
-import {RootState} from '@redux/index';
 import Feed from '../Feed/Feed';
 import Profile from '../Profile/Profile';
 import EmptyScreen from '../EmptyScreen/EmptyScreen';
@@ -12,8 +10,6 @@ import styles from './styles';
 const Tab = createMaterialBottomTabNavigator();
 
 const Home: React.FC = () => {
-  const user = useSelector<RootState>(state => state.auth.currentUser);
-  console.log(user);
   return (
     <View style={styles.container}>
       <Tab.Navigator initialRouteName="Feed" labeled={false}>
