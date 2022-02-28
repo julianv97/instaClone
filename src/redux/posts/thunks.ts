@@ -10,6 +10,7 @@ import {
   getPostPending,
   getPostRejected,
 } from './actions';
+import {IPost} from '@interfaces/index';
 
 export const savePost = (
   imageToUpload: string,
@@ -68,10 +69,12 @@ export const getPosts = () => {
       .collection('userPosts')
       .get()
       .then(snapshot => {
-        const posts = snapshot.docs.map(doc => {
+        const posts: IPost[] = snapshot.docs.map(doc => {
           return {
             id: doc.id,
-            ...doc.data(),
+            caption: doc.data().caption,
+            createdAt: doc.data().createdAt,
+            image: doc.data().image,
           };
         });
         dispatch(getPostFullfill(posts));

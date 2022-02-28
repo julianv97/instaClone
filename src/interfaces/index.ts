@@ -26,10 +26,16 @@ export interface IInitialStateAuth {
   isLoading: boolean;
   isError: boolean;
 }
+export interface IPost {
+  id: string;
+  caption: string;
+  createdAt: Date;
+  image: string;
+}
 
 export interface IInitialStatePosts {
   isLoading: boolean;
   isError: boolean;
   imageToUpload: string;
-  posts: [];
+  posts: IPost[];
 }

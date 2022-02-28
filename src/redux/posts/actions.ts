@@ -1,3 +1,4 @@
+import {IPost} from '@interfaces/index';
 import {
   SAVE_POST_FULLFILLED,
   SAVE_POST_PENDING,
@@ -19,7 +20,7 @@ export const savePostRejected = () => ({
   type: SAVE_POST_REJECTED,
 });
 
-export const getPostFullfill = (data: any) => ({
+export const getPostFullfill = (data: IPost[]) => ({
   type: GET_POSTS_FULLFILLED,
   payload: data,
 });
