@@ -7,7 +7,7 @@ Instaclone is a clone of Instagram made with React Native for the UI and a serve
 Use the package manager [yarn](https://yarnpkg.com/) to install Instaclone.
 
 ```bash
-yarn o yarn install
+yarn or yarn install
 ```
 
 Install Pods for Ios development
