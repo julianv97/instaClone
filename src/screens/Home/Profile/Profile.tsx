@@ -6,11 +6,10 @@ import {
   Image,
   FlatList,
   RefreshControl,
-  ScrollView,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {logoutUser} from '@redux/auth/thunks';
+import {logoutUser, getCurrentUser} from '@redux/auth/thunks';
 import {RootStackParamList} from '@customTypes/navigation';
 import {getPosts} from '@redux/posts/thunks';
 import {IUser} from '@interfaces/index';
@@ -32,6 +31,7 @@ const Profile: React.FC<Props> = ({navigation}) => {
   const user: IUser = useSelector<RootState>(state => state.auth.currentUser);
 
   useEffect(() => {
+    dispatch(getCurrentUser());
     dispatch(getPosts(setRefreshing));
   }, [dispatch]);
 
@@ -46,32 +46,28 @@ const Profile: React.FC<Props> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView
+      <View style={styles.containerInfo}>
+        <Text>{user.name}</Text>
+      </View>
+      <FlatList
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-        }>
-        <View style={styles.containerInfo}>
-          <Text>{user.email}</Text>
-        </View>
-        <FlatList
-          numColumns={3}
-          horizontal={false}
-          scrollEnabled={false}
-          data={posts}
-          renderItem={({item}) => (
-            <View style={styles.containerImage}>
-              <Image
-                style={styles.image}
-                source={{
-                  uri: item.image,
-                }}
-              />
-            </View>
-          )}
-          keyExtractor={item => item.id}
-          style={styles.list}
-        />
-      </ScrollView>
+        }
+        numColumns={3}
+        data={posts}
+        renderItem={({item}) => (
+          <View style={styles.containerImage}>
+            <Image
+              style={styles.image}
+              source={{
+                uri: item.image,
+              }}
+            />
+          </View>
+        )}
+        keyExtractor={item => item.id}
+        style={styles.list}
+      />
       <Button title="Logout" onPress={handlePress} />
     </View>
   );
