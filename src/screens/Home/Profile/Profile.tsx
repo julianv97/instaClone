@@ -1,12 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  Button,
-  Image,
-  FlatList,
-  RefreshControl,
-} from 'react-native';
+import {View, Text, Button} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {logoutUser, getCurrentUser} from '@redux/auth/thunks';
@@ -14,13 +7,12 @@ import {RootStackParamList} from '@customTypes/navigation';
 import {getPosts} from '@redux/posts/thunks';
 import {IUser} from '@interfaces/index';
 import {RootState} from '@redux/index';
+import GalleryProfile from '@components/GalleryPofile/GalleryProfile';
 import styles from './styles';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Profile'>;
 }
-
-// TODO: necesito un loader para la vista
 
 const Profile: React.FC<Props> = ({navigation}) => {
   const [refreshing, setRefreshing] = useState<boolean>(true);
@@ -49,25 +41,13 @@ const Profile: React.FC<Props> = ({navigation}) => {
       <View style={styles.containerInfo}>
         <Text>{user.name}</Text>
       </View>
-      <FlatList
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-        }
-        numColumns={3}
-        data={posts}
-        renderItem={({item}) => (
-          <View style={styles.containerImage}>
-            <Image
-              style={styles.image}
-              source={{
-                uri: item.image,
-              }}
-            />
-          </View>
-        )}
-        keyExtractor={item => item.id}
-        style={styles.list}
+
+      <GalleryProfile
+        posts={posts}
+        handleRefresh={handleRefresh}
+        refreshing={refreshing}
       />
+
       <Button title="Logout" onPress={handlePress} />
     </View>
   );
