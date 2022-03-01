@@ -39,3 +39,9 @@ export interface IInitialStatePosts {
   imageToUpload: string;
   posts: IPost[];
 }
+
+export interface IInitialStateUsers {
+  isLoading: boolean;
+  isError: boolean;
+  usersSearch: [];
+}
