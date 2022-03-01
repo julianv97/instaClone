@@ -7,9 +7,6 @@ interface Props {
 }
 
 const ProfileSearch: React.FC<Props> = ({name, onPress}) => {
-  if (!name) {
-    return null;
-  }
   return (
     <TouchableOpacity onPress={onPress}>
       <Text>{name}</Text>
