@@ -12,9 +12,14 @@ import styles from './styles';
 
 interface Props {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Profile'>;
+  route: {
+    params: {
+      uid: string;
+    };
+  };
 }
 
-const Profile: React.FC<Props> = ({navigation}) => {
+const Profile: React.FC<Props> = ({navigation, route}) => {
   const [refreshing, setRefreshing] = useState<boolean>(true);
   const dispatch = useDispatch();
   //@ts-ignore
@@ -23,12 +28,12 @@ const Profile: React.FC<Props> = ({navigation}) => {
   const user: IUser = useSelector<RootState>(state => state.auth.currentUser);
 
   useEffect(() => {
-    dispatch(getCurrentUser());
-    dispatch(getPosts(setRefreshing));
-  }, [dispatch]);
+    dispatch(getPosts(route.params.uid, setRefreshing));
+    dispatch(getCurrentUser(route.params.uid));
+  }, [dispatch, route.params.uid]);
 
   const handleRefresh = () => {
-    dispatch(getPosts(setRefreshing));
+    dispatch(getPosts(route.params.uid, setRefreshing));
   };
 
   const handlePress = () => {

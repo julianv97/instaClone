@@ -4,6 +4,7 @@ import {createMaterialBottomTabNavigator} from '@react-navigation/material-botto
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSelector} from 'react-redux';
 import {RootState} from '@redux/index';
+import {auth} from '@helpers/firebase';
 import Feed from '../Feed/Feed';
 import Profile from '../Profile/Profile';
 import Search from '../Search/Search';
@@ -64,6 +65,9 @@ const Home: React.FC = () => {
             tabBarIcon: ({color}) => (
               <MaterialCommunityIcons name="account" color={color} size={26} />
             ),
+          }}
+          initialParams={{
+            uid: auth.currentUser?.uid,
           }}
         />
       </Tab.Navigator>

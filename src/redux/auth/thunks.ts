@@ -37,10 +37,10 @@ export const registerUser = (data: IRegisterData, navigation: any) => {
 };
 
 // Método para traer ususarios de la base de datos
-export const getCurrentUser = () => {
+export const getCurrentUser = (uid: string) => {
   return (dispatch: (action: Action) => void) => {
     db.collection('users')
-      .doc(auth.currentUser?.uid)
+      .doc(uid)
       .get()
       .then(doc => {
         dispatch(setCurrentUser(doc.data()));

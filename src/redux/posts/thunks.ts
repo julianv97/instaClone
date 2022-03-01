@@ -61,12 +61,12 @@ export const savePost = (
   };
 };
 
-export const getPosts = (setRefresh: any) => {
+export const getPosts = (uid: string, setRefresh: any) => {
   return (dispatch: (action: Action) => void) => {
     dispatch(getPostPending());
     setRefresh(true);
     db.collection('posts')
-      .doc(auth.currentUser?.uid)
+      .doc(uid)
       .collection('userPosts')
       .orderBy('createdAt', 'desc')
       .get()

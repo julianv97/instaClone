@@ -1,11 +1,15 @@
 import React from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import {useForm} from 'react-hook-form';
 import {useDispatch, useSelector} from 'react-redux';
 import {searchUsers} from '@redux/users/thunks';
 import Field from '@components/Field/Field';
 
-const Search = () => {
+interface Props {
+  navigation: any;
+}
+
+const Search: React.FC<Props> = ({navigation}) => {
   const {control} = useForm();
   const dispatch = useDispatch();
   const usersSearch = useSelector((state: any) => state.users.usersSearch);
@@ -27,7 +31,12 @@ const Search = () => {
 
       <FlatList
         data={usersSearch}
-        renderItem={({item}) => <Text>{item.name}</Text>}
+        renderItem={({item}) => (
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Profile', {uid: item.id})}>
+            <Text>{item.name}</Text>
+          </TouchableOpacity>
+        )}
       />
     </View>
   );
