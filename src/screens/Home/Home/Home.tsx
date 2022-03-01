@@ -66,9 +66,12 @@ const Home: React.FC = () => {
               <MaterialCommunityIcons name="account" color={color} size={26} />
             ),
           }}
-          initialParams={{
-            uid: auth.currentUser?.uid,
-          }}
+          listeners={({navigation}) => ({
+            tabPress: e => {
+              e.preventDefault();
+              navigation.navigate('Profile', {uid: auth.currentUser?.uid});
+            },
+          })}
         />
       </Tab.Navigator>
     </View>
