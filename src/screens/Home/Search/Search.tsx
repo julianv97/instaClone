@@ -11,17 +11,21 @@ const Search = () => {
   // TODO: esto debería ir en thunks
   // TODO: ver como mejorar la busqueda
   const handleSearch = (text: string) => {
-    db.collection('users')
-      .where('name', '==', text)
-      .get()
-      .then(snapshot => {
-        let users = snapshot.docs.map(doc => {
-          const data = doc.data();
-          const id = doc.id;
-          return {id, ...data};
+    if (text.length > 0) {
+      db.collection('users')
+        .where('name', '>=', text)
+        .get()
+        .then(snapshot => {
+          let users = snapshot.docs.map(doc => {
+            const data = doc.data();
+            const id = doc.id;
+            return {id, ...data};
+          });
+          setUsersSeach(users);
         });
-        setUsersSeach(users);
-      });
+    } else {
+      setUsersSeach([]);
+    }
   };
 
   return (
