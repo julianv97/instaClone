@@ -67,12 +67,12 @@ const Profile: React.FC<Props> = ({navigation, route}) => {
     <View style={styles.container}>
       <View style={styles.containerInfo}>
         <Text>{user.name}</Text>
-        {route.params.uid !== auth.currentUser?.uid &&
-          (isFollowing ? (
-            <FollowButton title={'Following'} onPress={handleUnfollow} />
-          ) : (
-            <FollowButton title={'Follow'} onPress={handleFollow} />
-          ))}
+        {route.params.uid !== auth.currentUser?.uid && (
+          <FollowButton
+            title={isFollowing ? 'Following' : 'Follow'}
+            onPress={isFollowing ? handleUnfollow : handleFollow}
+          />
+        )}
       </View>
 
       <GalleryProfile
