@@ -13,6 +13,7 @@ import {
 } from './actions';
 import {ILoginData, IRegisterData} from '@interfaces/index';
 import {Action} from '@customTypes/redux';
+import {NavigationType} from '@customTypes/navigation';
 
 export const registerUser = (data: IRegisterData, navigation: any) => {
   return async (dispatch: (action: Action) => void) => {
@@ -48,7 +49,7 @@ export const getCurrentUser = (uid: string) => {
   };
 };
 
-export const loginUser = (data: ILoginData, navigation: any) => {
+export const loginUser = (data: ILoginData, navigation: NavigationType) => {
   return (dispatch: (action: Action) => void) => {
     dispatch(setLoginUserPending());
     auth
@@ -64,13 +65,14 @@ export const loginUser = (data: ILoginData, navigation: any) => {
   };
 };
 
-export const logoutUser = () => {
+export const logoutUser = (navigation: NavigationType) => {
   return (dispatch: (action: Action) => void) => {
     dispatch(setLogoutUserPending());
     auth
       .signOut()
       .then(() => {
         dispatch(setLogoutUserFullfill());
+        navigation.navigate('Landing');
       })
       .catch(error => {
         console.log(error);

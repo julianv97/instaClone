@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Button} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {logoutUser, getCurrentUser} from '@redux/auth/thunks';
-import {RootStackParamList} from '@customTypes/navigation';
+import {NavigationType} from '@customTypes/navigation';
 import {getPosts} from '@redux/posts/thunks';
 import {IUser} from '@interfaces/index';
 import {RootState} from '@redux/index';
@@ -13,7 +12,7 @@ import {auth, db} from '@helpers/firebase';
 import FollowButton from '@components/FollowButton/FollowButton';
 
 interface Props {
-  navigation: NativeStackNavigationProp<RootStackParamList, 'Profile'>;
+  navigation: NavigationType;
   route: {
     params: {
       uid: string;
@@ -40,8 +39,7 @@ const Profile: React.FC<Props> = ({navigation, route}) => {
   };
 
   const handlePress = () => {
-    dispatch(logoutUser());
-    navigation.navigate('Landing');
+    dispatch(logoutUser(navigation));
   };
 
   const handleUnfollow = () => {

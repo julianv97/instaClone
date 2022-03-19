@@ -1,3 +1,5 @@
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
 export type RootStackParamList = {
   Landing: undefined;
   Login: undefined;
@@ -11,3 +13,5 @@ export type RootStackParamList = {
     image: string | undefined;
   };
 };
+
+export type NavigationType = NativeStackNavigationProp<RootStackParamList>;

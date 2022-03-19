@@ -10,7 +10,7 @@ import FormLayout from '@components/FormLayout/FormLayout';
 import Field from '@components/Field/Field';
 
 interface Props {
-  navigation: NativeStackNavigationProp<RootStackParamList, 'Landing'>;
+  navigation: NativeStackNavigationProp<RootStackParamList>;
 }
 
 const Login: React.FC<Props> = ({navigation}) => {
