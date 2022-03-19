@@ -63,10 +63,6 @@ const Profile: React.FC<Props> = ({navigation, route}) => {
     dispatch(followUser(route.params.uid, setIsFollowing));
   };
 
-  console.log('currentUser', auth.currentUser?.uid);
-  console.log('params uid', route.params.uid);
-  console.log(userFollows);
-
   return (
     <View style={styles.container}>
       <View style={styles.containerInfo}>
