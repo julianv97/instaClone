@@ -6,6 +6,7 @@ import {
   GET_POSTS_FULLFILLED,
   GET_POSTS_PENDING,
   GET_POSTS_REJECTED,
+  LOGOUT_FULLFILLED,
 } from './constants';
 
 export const savePostFullFill = () => ({
@@ -31,4 +32,8 @@ export const getPostPending = () => ({
 
 export const getPostRejected = () => ({
   type: GET_POSTS_REJECTED,
+});
+
+export const logoutFullfill = () => ({
+  type: LOGOUT_FULLFILLED,
 });

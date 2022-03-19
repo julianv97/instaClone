@@ -32,6 +32,7 @@ const Profile: React.FC<Props> = ({navigation, route}) => {
   const user: IUser = useSelector<RootState>(state => state.auth.currentUser);
   //@ts-ignore
   const userFollows: string[] = useSelector<RootState>(
+    //@ts-ignore
     state => state.users.userFollows,
   );
 

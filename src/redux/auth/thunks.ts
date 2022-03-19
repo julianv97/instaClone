@@ -11,6 +11,8 @@ import {
   setLogoutUserPending,
   setLogoutUserRejected,
 } from './actions';
+import {logoutFullfill as logoutPosts} from '@redux/posts/actions';
+import {logoutFullFill as logoutUsers} from '@redux/users/actions';
 import {ILoginData, IRegisterData} from '@interfaces/index';
 import {Action} from '@customTypes/redux';
 import {NavigationType} from '@customTypes/navigation';
@@ -72,6 +74,8 @@ export const logoutUser = (navigation: NavigationType) => {
       .signOut()
       .then(() => {
         dispatch(setLogoutUserFullfill());
+        dispatch(logoutPosts());
+        dispatch(logoutUsers());
         navigation.navigate('Landing');
       })
       .catch(error => {

@@ -11,6 +11,7 @@ import {
   GET_USER_FOLLOWINGS_FULLFILLED,
   GET_USER_FOLLOWINGS_PENDING,
   GET_USER_FOLLOWINGS_REJECTED,
+  LOGOUT_FULLFILLED,
 } from './constants';
 
 export const searchUsersFullFill = (data: any) => ({
@@ -63,4 +64,8 @@ export const getUserFollowsPending = () => ({
 
 export const getUserFollowsRejected = () => ({
   type: GET_USER_FOLLOWINGS_REJECTED,
+});
+
+export const logoutFullFill = () => ({
+  type: LOGOUT_FULLFILLED,
 });

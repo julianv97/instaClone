@@ -14,6 +14,7 @@ import {
   GET_USER_FOLLOWINGS_FULLFILLED,
   GET_USER_FOLLOWINGS_PENDING,
   GET_USER_FOLLOWINGS_REJECTED,
+  LOGOUT_FULLFILLED,
 } from './constants';
 
 const initialState: IInitialStateUsers = {
@@ -94,6 +95,16 @@ const usersReducer = (state = initialState, action: Action) => {
         ...state,
         isError: true,
         isLoading: false,
+      };
+    case LOGOUT_FULLFILLED:
+      return {
+        ...state,
+        usersSearch: [],
+        userFollows: [],
+        followedUser: '',
+        unfollowUser: '',
+        isLoading: false,
+        isError: false,
       };
 
     default:

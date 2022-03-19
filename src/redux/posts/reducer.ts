@@ -7,6 +7,7 @@ import {
   GET_POSTS_FULLFILLED,
   GET_POSTS_PENDING,
   GET_POSTS_REJECTED,
+  LOGOUT_FULLFILLED,
 } from './constants';
 
 const initialState: IInitialStatePosts = {
@@ -50,6 +51,13 @@ const postsReducer = (state = initialState, action: Action) => {
         ...state,
         isLoading: false,
         isError: true,
+      };
+    case LOGOUT_FULLFILLED:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        posts: [],
       };
 
     default:
