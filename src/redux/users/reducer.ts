@@ -8,6 +8,9 @@ import {
   FOLLOW_USERS_FULLFILLED,
   FOLLOW_USERS_PENDING,
   FOLLOW_USERS_REJECTED,
+  UNFOLLOW_USERS_FULLFILLED,
+  UNFOLLOW_USERS_PENDING,
+  UNFOLLOW_USERS_REJECTED,
 } from './constants';
 
 const initialState: IInitialStateUsers = {
@@ -49,6 +52,23 @@ const usersReducer = (state = initialState, action: Action) => {
         followedUser: action.payload,
       };
     case FOLLOW_USERS_REJECTED:
+      return {
+        ...state,
+        isError: true,
+        isLoading: false,
+      };
+    case UNFOLLOW_USERS_PENDING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case UNFOLLOW_USERS_FULLFILLED:
+      return {
+        ...state,
+        isLoading: false,
+        unfollowUser: action.payload,
+      };
+    case UNFOLLOW_USERS_REJECTED:
       return {
         ...state,
         isError: true,
