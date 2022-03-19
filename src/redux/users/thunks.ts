@@ -1,9 +1,12 @@
-import {db} from '@helpers/firebase';
+import {db, auth} from '@helpers/firebase';
 import {Action} from '@customTypes/redux';
 import {
   searchUsersFullFill,
   searchUsersPending,
   searchUsersRejected,
+  followUsersFullFill,
+  followUsersPending,
+  followUsersRejected,
 } from './actions';
 
 export const searchUsers = (text: string) => {
@@ -28,5 +31,28 @@ export const searchUsers = (text: string) => {
     } catch (error) {
       dispatch(searchUsersRejected());
     }
+  };
+};
+
+export const followUser = (
+  followId: string,
+  setIsFollowing: (bool: boolean) => void,
+) => {
+  return (dispatch: (action: Action) => void) => {
+    dispatch(followUsersPending());
+    db.collection('following')
+      .doc(auth.currentUser?.uid)
+      .collection('usersFollowing')
+      .doc(followId)
+      .set({})
+      .then(() => {
+        console.log('follow');
+        setIsFollowing(true);
+        dispatch(followUsersFullFill(followId));
+      })
+      .catch(error => {
+        console.log(error);
+        dispatch(followUsersRejected());
+      });
   };
 };

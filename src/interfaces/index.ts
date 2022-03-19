@@ -44,4 +44,5 @@ export interface IInitialStateUsers {
   isLoading: boolean;
   isError: boolean;
   usersSearch: [];
+  followedUser: string;
 }

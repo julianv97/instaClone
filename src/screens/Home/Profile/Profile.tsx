@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {logoutUser, getCurrentUser} from '@redux/auth/thunks';
 import {NavigationType} from '@customTypes/navigation';
 import {getPosts} from '@redux/posts/thunks';
+import {followUser} from '@redux/users/thunks';
 import {IUser} from '@interfaces/index';
 import {RootState} from '@redux/index';
 import GalleryProfile from '@components/GalleryPofile/GalleryProfile';
@@ -60,18 +61,7 @@ const Profile: React.FC<Props> = ({navigation, route}) => {
   };
 
   const handleFollow = () => {
-    db.collection('following')
-      .doc(auth.currentUser?.uid)
-      .collection('usersFollowing')
-      .doc(route.params.uid)
-      .set({})
-      .then(() => {
-        console.log('follow');
-        setIsFollowing(true);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    dispatch(followUser(route.params.uid, setIsFollowing));
   };
 
   return (
