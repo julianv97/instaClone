@@ -7,10 +7,10 @@ import {getPosts} from '@redux/posts/thunks';
 import {followUser, getUserFollows, unfollowUser} from '@redux/users/thunks';
 import {IUser} from '@interfaces/index';
 import {RootState} from '@redux/index';
-import {currentUser} from 'src/constants';
 import FollowButton from '@components/FollowButton/FollowButton';
 import GalleryProfile from '@components/GalleryPofile/GalleryProfile';
 import styles from './styles';
+import {auth} from '@helpers/firebase';
 
 interface Props {
   navigation: NavigationType;
@@ -24,7 +24,6 @@ interface Props {
 const Profile: React.FC<Props> = ({navigation, route}) => {
   const [refreshing, setRefreshing] = useState(true);
   const [isFollowing, setIsFollowing] = useState(false);
-  const {uid: currentUid} = route.params;
   const dispatch = useDispatch();
   //@ts-ignore
   const posts: IPost[] = useSelector<RootState>(state => state.posts.posts);
@@ -37,19 +36,19 @@ const Profile: React.FC<Props> = ({navigation, route}) => {
   );
 
   useEffect(() => {
-    dispatch(getPosts(currentUid, setRefreshing));
-    dispatch(getCurrentUser(currentUid));
+    dispatch(getPosts(route.params.uid, setRefreshing));
+    dispatch(getCurrentUser(route.params.uid));
     dispatch(getUserFollows());
-  }, [dispatch, currentUid]);
+  }, [dispatch, route.params.uid]);
 
   useEffect(() => {
-    userFollows.includes(currentUid)
+    userFollows.includes(route.params.uid)
       ? setIsFollowing(true)
       : setIsFollowing(false);
-  }, [userFollows, currentUid]);
+  }, [userFollows, route.params.uid]);
 
   const handleRefresh = () => {
-    dispatch(getPosts(currentUid, setRefreshing));
+    dispatch(getPosts(route.params.uid, setRefreshing));
   };
 
   const handlePress = () => {
@@ -57,18 +56,22 @@ const Profile: React.FC<Props> = ({navigation, route}) => {
   };
 
   const handleUnfollow = () => {
-    dispatch(unfollowUser(currentUid, setIsFollowing));
+    dispatch(unfollowUser(route.params.uid, setIsFollowing));
   };
 
   const handleFollow = () => {
-    dispatch(followUser(currentUid, setIsFollowing));
+    dispatch(followUser(route.params.uid, setIsFollowing));
   };
+
+  console.log('currentUser', auth.currentUser?.uid);
+  console.log('params uid', route.params.uid);
+  console.log(userFollows);
 
   return (
     <View style={styles.container}>
       <View style={styles.containerInfo}>
         <Text>{user.name}</Text>
-        {currentUid !== currentUser &&
+        {route.params.uid !== auth.currentUser?.uid &&
           (isFollowing ? (
             <FollowButton title={'Following'} onPress={handleUnfollow} />
           ) : (

@@ -1,6 +1,5 @@
-import {db} from '@helpers/firebase';
+import {auth, db} from '@helpers/firebase';
 import {Action} from '@customTypes/redux';
-import {currentUser} from 'src/constants';
 import {
   searchUsersFullFill,
   searchUsersPending,
@@ -48,7 +47,7 @@ export const followUser = (
   return (dispatch: (action: Action) => void) => {
     dispatch(followUsersPending());
     db.collection('following')
-      .doc(currentUser)
+      .doc(auth.currentUser?.uid)
       .collection('usersFollowing')
       .doc(followId)
       .set({})
@@ -71,7 +70,7 @@ export const unfollowUser = (
   return (dispatch: (action: Action) => void) => {
     dispatch(unfollowUsersPending());
     db.collection('following')
-      .doc(currentUser)
+      .doc(auth.currentUser?.uid)
       .collection('usersFollowing')
       .doc(unfollowId)
       .delete()
@@ -92,7 +91,7 @@ export const getUserFollows = () => {
     dispatch(getUserFollowsPending());
     try {
       db.collection('following')
-        .doc(currentUser)
+        .doc(auth.currentUser?.uid)
         .collection('usersFollowing')
         .onSnapshot(snapshot => {
           const follows: string[] = snapshot.docs.map(doc => {
