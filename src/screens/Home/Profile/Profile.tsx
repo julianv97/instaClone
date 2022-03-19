@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {logoutUser, getCurrentUser} from '@redux/auth/thunks';
 import {NavigationType} from '@customTypes/navigation';
 import {getPosts} from '@redux/posts/thunks';
-import {followUser, unfollowUser} from '@redux/users/thunks';
+import {followUser, getUserFollows, unfollowUser} from '@redux/users/thunks';
 import {IUser} from '@interfaces/index';
 import {RootState} from '@redux/index';
 import {currentUser} from 'src/constants';
@@ -30,11 +30,22 @@ const Profile: React.FC<Props> = ({navigation, route}) => {
   const posts: IPost[] = useSelector<RootState>(state => state.posts.posts);
   //@ts-ignore
   const user: IUser = useSelector<RootState>(state => state.auth.currentUser);
+  //@ts-ignore
+  const userFollows: string[] = useSelector<RootState>(
+    state => state.users.userFollows,
+  );
 
   useEffect(() => {
     dispatch(getPosts(currentUid, setRefreshing));
     dispatch(getCurrentUser(currentUid));
+    dispatch(getUserFollows());
   }, [dispatch, currentUid]);
+
+  useEffect(() => {
+    userFollows.includes(currentUid)
+      ? setIsFollowing(true)
+      : setIsFollowing(false);
+  }, [userFollows, currentUid]);
 
   const handleRefresh = () => {
     dispatch(getPosts(currentUid, setRefreshing));

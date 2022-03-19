@@ -11,6 +11,9 @@ import {
   unfollowUsersFullFill,
   unfollowUsersPending,
   unfollowUsersRejected,
+  getUserFollowsFullFill,
+  getUserFollowsPending,
+  getUserFollowsRejected,
 } from './actions';
 
 export const searchUsers = (text: string) => {
@@ -81,5 +84,24 @@ export const unfollowUser = (
         console.log(error);
         dispatch(unfollowUsersRejected());
       });
+  };
+};
+
+export const getUserFollows = () => {
+  return (dispatch: (action: Action) => void) => {
+    dispatch(getUserFollowsPending());
+    try {
+      db.collection('following')
+        .doc(currentUser)
+        .collection('usersFollowing')
+        .onSnapshot(snapshot => {
+          const follows: string[] = snapshot.docs.map(doc => {
+            return doc.id;
+          });
+          dispatch(getUserFollowsFullFill(follows));
+        });
+    } catch {
+      dispatch(getUserFollowsRejected());
+    }
   };
 };

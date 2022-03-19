@@ -11,10 +11,14 @@ import {
   UNFOLLOW_USERS_FULLFILLED,
   UNFOLLOW_USERS_PENDING,
   UNFOLLOW_USERS_REJECTED,
+  GET_USER_FOLLOWINGS_FULLFILLED,
+  GET_USER_FOLLOWINGS_PENDING,
+  GET_USER_FOLLOWINGS_REJECTED,
 } from './constants';
 
 const initialState: IInitialStateUsers = {
   usersSearch: [],
+  userFollows: [],
   followedUser: '',
   unfollowUser: '',
   isLoading: false,
@@ -69,6 +73,23 @@ const usersReducer = (state = initialState, action: Action) => {
         unfollowUser: action.payload,
       };
     case UNFOLLOW_USERS_REJECTED:
+      return {
+        ...state,
+        isError: true,
+        isLoading: false,
+      };
+    case GET_USER_FOLLOWINGS_PENDING:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case GET_USER_FOLLOWINGS_FULLFILLED:
+      return {
+        ...state,
+        isLoading: false,
+        userFollows: action.payload,
+      };
+    case GET_USER_FOLLOWINGS_REJECTED:
       return {
         ...state,
         isError: true,

@@ -8,6 +8,9 @@ import {
   UNFOLLOW_USERS_FULLFILLED,
   UNFOLLOW_USERS_PENDING,
   UNFOLLOW_USERS_REJECTED,
+  GET_USER_FOLLOWINGS_FULLFILLED,
+  GET_USER_FOLLOWINGS_PENDING,
+  GET_USER_FOLLOWINGS_REJECTED,
 } from './constants';
 
 export const searchUsersFullFill = (data: any) => ({
@@ -47,4 +50,17 @@ export const unfollowUsersPending = () => ({
 
 export const unfollowUsersRejected = () => ({
   type: UNFOLLOW_USERS_REJECTED,
+});
+
+export const getUserFollowsFullFill = (data: any) => ({
+  type: GET_USER_FOLLOWINGS_FULLFILLED,
+  payload: data,
+});
+
+export const getUserFollowsPending = () => ({
+  type: GET_USER_FOLLOWINGS_PENDING,
+});
+
+export const getUserFollowsRejected = () => ({
+  type: GET_USER_FOLLOWINGS_REJECTED,
 });

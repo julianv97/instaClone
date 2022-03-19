@@ -46,4 +46,5 @@ export interface IInitialStateUsers {
   usersSearch: [];
   followedUser: string;
   unfollowUser: string;
+  userFollows: [];
 }
