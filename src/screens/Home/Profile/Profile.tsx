@@ -4,13 +4,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {logoutUser, getCurrentUser} from '@redux/auth/thunks';
 import {NavigationType} from '@customTypes/navigation';
 import {getPosts} from '@redux/posts/thunks';
-import {followUser} from '@redux/users/thunks';
+import {followUser, unfollowUser} from '@redux/users/thunks';
 import {IUser} from '@interfaces/index';
 import {RootState} from '@redux/index';
+import {currentUser} from 'src/constants';
+import FollowButton from '@components/FollowButton/FollowButton';
 import GalleryProfile from '@components/GalleryPofile/GalleryProfile';
 import styles from './styles';
-import {auth, db} from '@helpers/firebase';
-import FollowButton from '@components/FollowButton/FollowButton';
 
 interface Props {
   navigation: NavigationType;
@@ -24,6 +24,7 @@ interface Props {
 const Profile: React.FC<Props> = ({navigation, route}) => {
   const [refreshing, setRefreshing] = useState(true);
   const [isFollowing, setIsFollowing] = useState(false);
+  const {uid: currentUid} = route.params;
   const dispatch = useDispatch();
   //@ts-ignore
   const posts: IPost[] = useSelector<RootState>(state => state.posts.posts);
@@ -31,12 +32,12 @@ const Profile: React.FC<Props> = ({navigation, route}) => {
   const user: IUser = useSelector<RootState>(state => state.auth.currentUser);
 
   useEffect(() => {
-    dispatch(getPosts(route.params.uid, setRefreshing));
-    dispatch(getCurrentUser(route.params.uid));
-  }, [dispatch, route.params.uid]);
+    dispatch(getPosts(currentUid, setRefreshing));
+    dispatch(getCurrentUser(currentUid));
+  }, [dispatch, currentUid]);
 
   const handleRefresh = () => {
-    dispatch(getPosts(route.params.uid, setRefreshing));
+    dispatch(getPosts(currentUid, setRefreshing));
   };
 
   const handlePress = () => {
@@ -44,31 +45,18 @@ const Profile: React.FC<Props> = ({navigation, route}) => {
   };
 
   const handleUnfollow = () => {
-    const uid = auth.currentUser?.uid;
-    const {uid: userUid} = route.params;
-    db.collection('following')
-      .doc(uid)
-      .collection('usersFollowing')
-      .doc(userUid)
-      .delete()
-      .then(() => {
-        console.log('unfollowed');
-        setIsFollowing(false);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    dispatch(unfollowUser(currentUid, setIsFollowing));
   };
 
   const handleFollow = () => {
-    dispatch(followUser(route.params.uid, setIsFollowing));
+    dispatch(followUser(currentUid, setIsFollowing));
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.containerInfo}>
         <Text>{user.name}</Text>
-        {route.params.uid !== auth.currentUser?.uid &&
+        {currentUid !== currentUser &&
           (isFollowing ? (
             <FollowButton title={'Following'} onPress={handleUnfollow} />
           ) : (

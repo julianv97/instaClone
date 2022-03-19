@@ -1,5 +1,6 @@
-import {db, auth} from '@helpers/firebase';
+import {db} from '@helpers/firebase';
 import {Action} from '@customTypes/redux';
+import {currentUser} from 'src/constants';
 import {
   searchUsersFullFill,
   searchUsersPending,
@@ -7,6 +8,9 @@ import {
   followUsersFullFill,
   followUsersPending,
   followUsersRejected,
+  unfollowUsersFullFill,
+  unfollowUsersPending,
+  unfollowUsersRejected,
 } from './actions';
 
 export const searchUsers = (text: string) => {
@@ -41,7 +45,7 @@ export const followUser = (
   return (dispatch: (action: Action) => void) => {
     dispatch(followUsersPending());
     db.collection('following')
-      .doc(auth.currentUser?.uid)
+      .doc(currentUser)
       .collection('usersFollowing')
       .doc(followId)
       .set({})
@@ -53,6 +57,29 @@ export const followUser = (
       .catch(error => {
         console.log(error);
         dispatch(followUsersRejected());
+      });
+  };
+};
+
+export const unfollowUser = (
+  unfollowId: string,
+  setIsFollowing: (bool: boolean) => void,
+) => {
+  return (dispatch: (action: Action) => void) => {
+    dispatch(unfollowUsersPending());
+    db.collection('following')
+      .doc(currentUser)
+      .collection('usersFollowing')
+      .doc(unfollowId)
+      .delete()
+      .then(() => {
+        console.log('unfollowed');
+        setIsFollowing(false);
+        dispatch(unfollowUsersFullFill(unfollowId));
+      })
+      .catch(error => {
+        console.log(error);
+        dispatch(unfollowUsersRejected());
       });
   };
 };

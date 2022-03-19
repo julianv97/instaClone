@@ -13,6 +13,7 @@ import {
 const initialState: IInitialStateUsers = {
   usersSearch: [],
   followedUser: '',
+  unfollowUser: '',
   isLoading: false,
   isError: false,
 };

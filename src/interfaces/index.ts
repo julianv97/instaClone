@@ -45,4 +45,5 @@ export interface IInitialStateUsers {
   isError: boolean;
   usersSearch: [];
   followedUser: string;
+  unfollowUser: string;
 }
