@@ -26,7 +26,10 @@ const initialState: IInitialStateUsers = {
   isError: false,
 };
 
-const usersReducer = (state = initialState, action: Action) => {
+const usersReducer = (
+  state = initialState,
+  action: Action,
+): IInitialStateUsers => {
   switch (action.type) {
     case SEARCH_USERS_PENDING:
       return {

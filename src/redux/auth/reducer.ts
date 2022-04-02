@@ -14,13 +14,17 @@ import {
 const initialState: IInitialStateAuth = {
   currentUser: {
     email: '',
+    name: '',
   },
   authenticated: false,
   isLoading: false,
   isError: false,
 };
 
-const authReducer = (state = initialState, action: Action) => {
+const authReducer = (
+  state = initialState,
+  action: Action,
+): IInitialStateAuth => {
   switch (action.type) {
     case SET_CURRENT_USER:
       return {

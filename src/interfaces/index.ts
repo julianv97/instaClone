@@ -22,6 +22,7 @@ export interface IInitialStateAuth {
   authenticated: boolean;
   currentUser: {
     email: string;
+    name?: string;
   };
   isLoading: boolean;
   isError: boolean;

@@ -17,12 +17,15 @@ const initialState: IInitialStatePosts = {
   posts: [],
 };
 
-const postsReducer = (state = initialState, action: Action) => {
+const postsReducer = (
+  state = initialState,
+  action: Action,
+): IInitialStatePosts => {
   switch (action.type) {
     case SAVE_POST_PENDING:
       return {
         ...state,
-        IsLoading: true,
+        isLoading: true,
       };
     case SAVE_POST_FULLFILLED:
       return {
