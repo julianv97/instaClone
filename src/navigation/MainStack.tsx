@@ -26,7 +26,7 @@ const MainStack: React.FC = () => {
         setLoading(false);
       }
     });
-  }, []);
+  }, [firstScreen]);
 
   if (loading) {
     return null;
