@@ -1,5 +1,5 @@
-import {auth, db} from '@helpers/firebase';
-import {Action} from '@customTypes/redux';
+import { auth, db } from '@helpers/firebase';
+import { Action } from '@customTypes/redux';
 import {
   searchUsersFullFill,
   searchUsersPending,
@@ -21,14 +21,15 @@ export const searchUsers = (text: string) => {
     try {
       if (text.length > 0) {
         db.collection('users')
-          .where('name', '>=', text)
+          .where('name', '<=', text)
           .get()
           .then(snapshot => {
             let users = snapshot.docs.map(doc => {
               const data = doc.data();
               const id = doc.id;
-              return {id, ...data};
+              return { id, ...data };
             });
+            console.log(users);
             dispatch(searchUsersFullFill(users));
           });
       } else {
